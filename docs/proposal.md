@@ -24,7 +24,13 @@ If the project is successful, what difference will it make, both technically and
 
 ## 5. Challenges
 
-What are the challenges and risks?
+The project faces two principal categories of challenges: mechanical robustness and software complexity.
+
+Mechanically, the design must be durable to ensure long-term functionality. The system needs to be able to repetedly rotate to accurate positions and self-calibrate. 
+
+On the software side, we encounter several intricate issues. First, the system requires sophisticated algorithms for cloud detection and precise solar tracking. The latter involves using the Solar Position Algorithm (SPA) to translate solar azimuth and zenith angles into corresponding pixel locations in the camera's field of view. Additionally, the software must intelligently process information about cloud coverage to adjust the panels' angles optimally.
+
+Another significant software challenge is the detection of severe weather conditions. Testing the system in Los Angeles, where such weather is infrequent, limits our ability to refine this feature. Specifically, identifying hail through camera-based methods poses a substantial difficulty, given the limitations of visual detection under such conditions.
 
 ## 6. Requirements for Success
 
@@ -68,7 +74,8 @@ After learning about the technology, we were interested in the financial conside
 
 ### 9.c. Software
 
-List softwate that you have identified and plan to use. Provide references (with full citation in the References section below).
+Pvlib is used as the Solar Positioning Algorithm (SPA) library. 
+OpenCV is used for general image processing and cloud segmentation. 
 
 ## 10. References
 
@@ -87,8 +94,13 @@ Sharpe, Jeff. “Various Solar Tracking Technologies.” Stracker Solar, 10 Nov.
 
 Zsiborács, Henrik, et al. “Active Solar-Tracking Systems for Photovoltaic Technology &amp; Implementation.” Sensors (Basel, Switzerland), U.S. National            Center for Biotechnology Information, 27 Mar. 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9003414/. 
 
-"SWIMSEG: Singapore Whole sky IMaging SEGmentation Database." National University of Singapore, captured Oct. 2013 to July 2015.
 
 ### ii. Databases
 
+"SWIMSEG: Singapore Whole sky IMaging SEGmentation Database." National University of Singapore, captured Oct. 2013 to July 2015.
+
 ### iii. Softwares
+
+Holmgren, William F., et al. "pvlib python: a python package for modeling solar energy systems." Journal of Open Source Software, vol. 3, no. 29, 2018, p. 884. DOI.org/10.21105/joss.00884.
+
+Bradski, Gary. "The OpenCV Library." Dr. Dobb's Journal of Software Tools, 2000.
