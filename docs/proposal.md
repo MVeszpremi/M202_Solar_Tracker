@@ -16,11 +16,15 @@ Improvements in these areas could lead to a more streamlined, energy-efficient, 
 
 ## 3. Novelty & Rationale
 
-What is new in your approach and why do you think it will be successful?
+Developing a dual-axis, photograph-based sun tracking solar panel represents a groundbreaking and unprecedented innovation in the renewable energy landscape. It distinguishes itself as the first technology of its kind due to its unique approach to tracking the sun's position while avoiding cloud cover and inclement weather. While conventional sun tracking systems primarily rely on predetermined algorithms or light sensors, this cutting-edge solution harnesses the power of photograph-based tracking. This novel method employs advanced image recognition technology to constantly evaluate the sun's exact location in the sky, realtive angles, and solar ray disruption thus allowing the solar panel to autonomously adjust both its horizontal and vertical angles with unparalleled precision. This pioneering technology marks a departure from traditional fixed solar panels and even single-axis tracking systems. By offering a more adaptable and responsive approach to capturing solar energy, it promises to significantly enhance energy output. The system's ability to fine-tune its orientation throughout the day and across seasons is a game-changer in the field of solar energy generation. As the first of its kind, this innovation stands as a testament to human ingenuity and our relentless pursuit of sustainable energy solutions that are poised for success. 
+
+The prospects for the success of this innovative dual-axis, photograph-based sun tracking solar panel technology are highly promising. Its success is underpinned by several key factors. Firstly, the precision and adaptability afforded by photograph-based tracking result in significantly increased energy capture efficiency, ensuring optimal energy production across various geographical locations and changing solar conditions. This enhanced efficiency, coupled with a potential reduction in reliance on conventional energy sources, positions the technology as a cost-effective and environmentally responsible solution. Furthermore, the scalability and applicability of this novel system could drive its adoption across residential, commercial, and industrial sectors. With its ability to adapt to local solar patterns, it can cater to a wide range of energy needs. Moreover, as the world's focus on sustainability and renewable energy intensifies, this solar panel represents a pivotal step forward in meeting the growing demand for clean energy. These factors collectively contribute to the technology's potential for success and its ability to revolutionize the solar energy industry.
 
 ## 4. Potential Impact
 
-If the project is successful, what difference will it make, both technically and broadly?
+The potential impact of the dual-axis, photograph-based sun tracking solar panel extends far beyond its technical advancements. From a technical standpoint, this innovation has the capacity to significantly enhance solar energy production efficiency, making it a pivotal asset in the transition towards renewable energy sources. By harnessing image recognition technology and its precise tracking capabilities, it can maximize energy capture and adapt to diverse environmental conditions, making it a versatile solution for various regions and applications.
+
+Broadly, its impact has the potential to reshape the entire energy landscape. The adoption of this technology could drive a substantial reduction in greenhouse gas emissions, mitigating the effects of climate change and promoting sustainability. Furthermore, its success could stimulate innovation in the renewable energy sector, encouraging further research and development in similar groundbreaking technologies. As a cleaner and more efficient energy source, it can enhance energy security, reduce dependence on fossil fuels, and drive economic growth by creating new opportunities in manufacturing, installation, and maintenance. Ultimately, the dual-axis, photograph-based sun tracking solar panel represents a transformative force that could propel society towards a greener, more sustainable future.
 
 ## 5. Challenges
 
@@ -34,7 +38,27 @@ Another significant software challenge is the detection of severe weather condit
 
 ## 6. Requirements for Success
 
-What skills and resources are necessary to perform the project?
+1. Solar Engineering Expertise: In-depth knowledge of solar engineering is essential. This includes understanding the photovoltaic effect, solar panel design, and the interaction between solar cells and light to optimize energy conversion as well as sun angles, incident rays, weather obstructions, etc. This motivates our extensive research into the topic. 
+
+2. Image Recognition and Machine Learning: Proficiency in image recognition and machine learning is a core technical skill. We must create algorithms that can accurately locate and track the sun's position in real-time while identifying cloud cover and poor weather conditions. Such algorithms can be developed on Python and/or integrated on Raspberry Pi. Additionally, the datasets described below, can be trained and tested through trial and error. 
+
+3. Mechanical Engineering: We must effecitvely design the tracking mechanism, ensuring precise movement of the solar panel in both horizontal and vertical axes. Our active solar tracker must also account for durability, weather resistance, and maintenance considerations. 3D printers are necessary for part manufacturing and Arduino microcontroller kits are essential for motor installment and callibration. 
+
+4. Electrical Engineering: We must integrate the tracking system with the solar panel and power sources. We must ensure that the electrical connections are developed in a sound manner and the panel operates in a safe and efficient fashion while converting and storing generated electricity. 
+
+5. Material Science: Knowledge of advanced photovoltaic materials and their properties is crucial for selecting the most suitable materials to achieve maximum energy conversion.
+
+6. Testing and Validation: After training data sets, constant validation with new images will be necessary. Because the weather near UCLA does not offer a large variety of weather conditions, most of this will be done virtually. However, we must seize opportunities to test and validate when the weather conditions are less than ideal for more accurate feedback. We must record reliable data and accurately provide the input to our algorithms to assess the system's performance under varying weather conditions over extended periods, ensuring reliability and efficiency.
+
+7. Solar Data Integration: Skills to gather, process, and integrate real-time solar data into the system are critical for accurate sun tracking. This overlaps with algorithm development, but we must make sure that the data we seek to integrate is reliable such as GPS coordinates, callibration references, and relative angles. 
+
+8. Safety and Compliance Knowledge: Although not a major concern for our immediate project, if we seek to continue our project outside of class, a strong understanding of safety standards, electrical codes, and environmental regulations is necessary to ensure the solar panel complies with industry and legal requirements.
+
+9. Environmental Impact Assessment: Again, although a lower priority, for marketing and empirical data purposes, the ability to assess the environmental impact of the solar panel's production and deployment is crucial to address ecological concerns and sustainability.
+
+10. Project Management: Effective project management skills are vital to coordinate the efforts of the multidisciplinary team and ensure the project progresses according to the defined timeline and theoretical budget.
+
+Developing this advanced solar panel technology demands a convergence of these technical skills and access to the necessary resources, from engineering expertise to prototyping and validation. The successful integration of these elements will be instrumental in bringing the novel dual-axis, photograph-based sun tracking solar panel to fruition.
 
 ## 7. Metrics of Success
 
