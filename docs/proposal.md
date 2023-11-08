@@ -55,8 +55,10 @@ This article gave us insight into the state-of-the-art in the solar industry. It
 After learning about the technology, we were interested in the financial considerations of actually implementing that technology. This article provides an in depth investment review at the residential and commerical level. Although this project is not heavily concerned with finanical implications, as engineers and entrepreneurs, we wanted to take the time to understand all aspects of our project. 
 
 ### 9.b. Datasets
+1. Singapore Whole sky IMaging SEGmentation Database
+2. Singapore Whole sky IMaging CATegories Database
+3. 
 
-List datasets that you have identified and plan to use. Provide references (with full citation in the References section below).
 
 ### 9.c. Software
 
@@ -78,6 +80,8 @@ Nie, Yuhao, et al. “Sky-Image-Based Solar Forecasting Using Deep Learning.” 
 Sharpe, Jeff. “Various Solar Tracking Technologies.” Stracker Solar, 10 Nov. 2022, strackersolar.com/knowledge-base/what-are-solar-trackers. 
 
 Zsiborács, Henrik, et al. “Active Solar-Tracking Systems for Photovoltaic Technology &amp; Implementation.” Sensors (Basel, Switzerland), U.S. National            Center for Biotechnology Information, 27 Mar. 2022, www.ncbi.nlm.nih.gov/pmc/articles/PMC9003414/. 
+
+"SWIMSEG: Singapore Whole sky IMaging SEGmentation Database." National University of Singapore, captured Oct. 2013 to July 2015.
 
 ### ii. Databases
 
