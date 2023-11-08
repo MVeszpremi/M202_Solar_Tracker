@@ -2,11 +2,17 @@
 
 ## 1. Motivation & Objective
 
-What are you trying to do and why? (plain English without jargon)
+The objective of this project is to enhance the efficiency and lifespan of solar panels through the creation of an advanced system that optimizes the angle of incoming solar radiation. To achieve this, the panels will be affixed to a dual-axis mechanical gimbal, which will dynamically adjust their orientation. This adjustment is informed by continuous monitoring and analysis of the sky conditions using an upward-facing camera, enabling precise alignment of the panels with the sun's position to maximize energy capture and adjustment to a vertical position reduce wear over during extreme weather.
 
 ## 2. State of the Art & Its Limitations
 
-How is it done today, and what are the limits of current practice?
+The existing technology in the field predominantly relies on constant rotational adjustments to discover the most effective positioning for solar panels, coupled with the employment of traditional analog sensors for anticipating or identifying severe weather conditions. This approach, however, presents two main drawbacks:
+
+First, the method of continuously sweeping through the entire range of possible angles can lead to significant energy losses, particularly when repeated adjustments are required. This frequent motion not only consumes power but also signifies operational inefficiency.
+
+Second, the deployment of analog sensors, each designed for a singular purpose, is becoming increasingly obsolete. Such a configuration necessitates an extensive suite of sensors, which results in a complex and costly installation process due to the multitude of components involved.
+
+Improvements in these areas could lead to a more streamlined, energy-efficient, and cost-effective system.
 
 ## 3. Novelty & Rationale
 
