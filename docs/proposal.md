@@ -38,6 +38,8 @@ Another significant software challenge is the detection of severe weather condit
 
 ## 6. Requirements for Success
 
+Developing this advanced solar panel technology demands a convergence of these technical skills and access to the necessary resources, from engineering expertise to prototyping and validation. The successful integration of these elements will be instrumental in bringing the novel dual-axis, photograph-based sun tracking solar panel to fruition:
+
 1. Solar Engineering Expertise: In-depth knowledge of solar engineering is essential. This includes understanding the photovoltaic effect, solar panel design, and the interaction between solar cells and light to optimize energy conversion as well as sun angles, incident rays, weather obstructions, etc. This motivates our extensive research into the topic. 
 
 2. Image Recognition and Machine Learning: Proficiency in image recognition and machine learning is a core technical skill. We must create algorithms that can accurately locate and track the sun's position in real-time while identifying cloud cover and poor weather conditions. Such algorithms can be developed on Python and/or integrated on Raspberry Pi. Additionally, the datasets described below, can be trained and tested through trial and error. 
@@ -58,15 +60,78 @@ Another significant software challenge is the detection of severe weather condit
 
 10. Project Management: Effective project management skills are vital to coordinate the efforts of the multidisciplinary team and ensure the project progresses according to the defined timeline and theoretical budget.
 
-Developing this advanced solar panel technology demands a convergence of these technical skills and access to the necessary resources, from engineering expertise to prototyping and validation. The successful integration of these elements will be instrumental in bringing the novel dual-axis, photograph-based sun tracking solar panel to fruition.
-
 ## 7. Metrics of Success
 
-What are metrics by which you would check for success?
+These metrics collectively provide a comprehensive evaluation, guiding the development and optimization of the technology for maximum impact in the field of solar energy:
+
+1. Photograph-Based Tracking Accuracy: Measure the precision of the image recognition system by evaluating how accurately it identifies and tracks the sun's position. This can be quantified as a percentage of tracking accuracy, reflecting how closely the solar panel aligns with the sun.
+
+2. Angular Error Rate: Assess the angular error rate, which quantifies the degree of deviation between the actual sun position and the solar panel's tracked position. A lower angular error rate indicates higher tracking precision.
+
+3. Response Time of Tracking System: Evaluate the responsiveness of the photograph-based tracking system by measuring the time it takes to adjust the solar panel's orientation in response to changes in the sun's position. A faster response time enhances overall efficiency.
+
+4. Efficiency Gain Over Fixed Panels: Compare the energy output and efficiency of the photograph-based sun tracking solar panel to fixed solar panels. Express the efficiency gain as a percentage increase in energy production, showcasing the technology's superior performance.
+
+5. Algorithm Optimization: Assess the efficiency of the image recognition algorithms by measuring their processing speed and resource utilization. Optimized algorithms contribute to faster and more accurate sun tracking.
+
+6. Robustness to Environmental Conditions: Evaluate the technology's performance under varying environmental conditions, including cloudy days, shadows, and low light situations. A successful system should demonstrate robustness and adaptability to different scenarios.
+
+7. System Reliability: Measure the reliability of the tracking system by monitoring the occurrence of errors, malfunctions, or downtime. A reliable system minimizes disruptions and ensures consistent energy production.
+
+8. Code Stability and Maintenance: Assess the stability of the software code by tracking any incidents of bugs, glitches, or crashes. Evaluate the ease of maintenance and updates to ensure the long-term sustainability of the technology.
 
 ## 8. Execution Plan
 
-Describe the key tasks in executing your project, and in case of team project describe how will you partition the tasks.
+1. Define Objectives and Requirements:
+   - Clearly define the objectives of the solar panel, such as maximizing energy output and efficiency
+   - Specify technical requirements, including tracking accuracy, response time, and adaptability to different environments
+   - This was completed in this proposal by the whole team
+
+2. Research and Data Collection:
+   - Gather solar data for the target geographic locations, including sun path, intensity, and seasonal variations
+   - Research existing solar tracking technologies and image recognition algorithms
+   - This was completed by the whole team
+
+3. Design and Engineering:
+   - Develop a detailed design of the dual-axis tracking system, considering mechanical and electrical aspects
+   - Integrate image recognition algorithms into the control system to enable accurate sun tracking
+   - Design the solar panel layout for optimal energy capture
+   - This is primarily Marcell's and Russell's job as they have experience with robotic systems
+
+4. Prototyping and Testing:
+   - Build a prototype of the solar panel system for testing and validation.
+   - Conduct initial tests to evaluate tracking accuracy, system response time, and overall performance
+   - Iteratively refine the design based on test results
+   - Marcell will primarily execute building the design because of his expertise and resource access
+   - The whole team will preform trials and iterate/refine
+     
+5. Algorithm Development and Optimization:
+   - Implement and optimize image recognition algorithms for sun tracking
+   - Ensure the algorithms can adapt to changing environmental conditions and provide real-time adjustments
+   - This will primarily be Richard's task because of his experience with machine learning
+     
+6. Software Development:
+   - Develop the software that controls the entire solar tracking system, incorporating feedback from camera's and adjusting the panel's orientation
+   - Ensure the software is robust, reliable, and capable of real-time decision-making
+   - Marcell will focus on image reading and dual-axis motor synchronization
+   - Richard will focus on cloud/bad weather detection
+   - Russell will focus on optimizing incident angles and solar tracking through GPS
+     
+7. Testing and Validation:
+   - Conduct comprehensive testing under various environmental conditions to validate the system's performance
+   - Evaluate the system's reliability, accuracy, and efficiency through extended testing periods
+   - This may be limited due to Los Angeles' moderate weather, but training our algorithm over the large dataset should suffice
+   - This will be accompished by the whole team
+
+8. Optimization and Feedback Loop:
+   - Analyze test results and user feedback to identify areas for improvement
+   - Iterate on the design, algorithms, and software to optimize performance and address any identified issues
+   - This task will be completed by the whole team in their respective areas described above.
+     
+9. Documentation:
+   - Document the entire development process, including design specifications, algorithms, and testing procedures
+   - Compile this documentation into a final report
+   - Primarily Russell's job, with the help of the team by gathering information from their respective tasks 
 
 ## 9. Related Work
 
@@ -91,15 +156,14 @@ This article gave us insight into the state-of-the-art in the solar industry. It
 After learning about the technology, we were interested in the financial considerations of actually implementing that technology. This article provides an in depth investment review at the residential and commerical level. Although this project is not heavily concerned with finanical implications, as engineers and entrepreneurs, we wanted to take the time to understand all aspects of our project. 
 
 ### 9.b. Datasets
+
 1. Singapore Whole sky IMaging SEGmentation Database
 2. Singapore Whole sky IMaging CATegories Database
-3. 
-
 
 ### 9.c. Software
 
-Pvlib is used as the Solar Positioning Algorithm (SPA) library. 
-OpenCV is used for general image processing and cloud segmentation. 
+1. Pvlib is used as the Solar Positioning Algorithm (SPA) library
+2. OpenCV is used for general image processing and cloud segmentation
 
 ## 10. References
 
