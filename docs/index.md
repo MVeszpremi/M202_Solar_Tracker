@@ -5,7 +5,7 @@ Provide a brief overview of the project objhectives, approach, and results.
 # Team
 
 * Richard Guo
-* Russell Strong IV
+* Russell Stong IV
 * Marcell Veszpremi
 
 # Required Submissions
