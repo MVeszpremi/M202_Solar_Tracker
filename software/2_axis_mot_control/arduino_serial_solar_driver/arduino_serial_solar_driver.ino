@@ -21,10 +21,10 @@ const uint8_t TOP_TMR_PIN = 11;
 const uint8_t BOTTOM_TMR_PIN = 9;
 
 
-const int max_angle_top = 250;
-const int min_angle_top = -250;
-const int max_angle_bottom = 250;
-const int min_angle_bottom = -250;
+const int max_angle_top = 275;
+const int min_angle_top = -600;
+const int max_angle_bottom = 275;
+const int min_angle_bottom = -275;
 
 unsigned long last_move_time = 0;
 
@@ -72,6 +72,8 @@ void setup()
 
   calibrateTopMotorAndCenter();
   calibrateBottomMotorAndCenter();
+  calibrateTopMotorAndCenter();
+  calibrateBottomMotorAndCenter();
 
   Serial.print("r");
 }
@@ -112,7 +114,7 @@ if(Serial.available()){
     u8_serial_in_receipt = 0;
     }
 
-  if(desired_angle_top > min_angle_top && desired_angle_top < max_angle_top && desired_angle_bottom > min_angle_bottom && desired_angle_bottom < max_angle_bottom && millis()- last_move_time > 10000){
+  if(desired_angle_top >= min_angle_top && desired_angle_top <= max_angle_top && desired_angle_bottom >= min_angle_bottom && desired_angle_bottom <= max_angle_bottom && millis()- last_move_time > 10000){
     last_move_time = millis();
 
       int angle_to_move_top = desired_angle_top - current_angle_top;
