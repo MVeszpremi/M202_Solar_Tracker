@@ -26,8 +26,6 @@ const int min_angle_top = -600;
 const int max_angle_bottom = 275;
 const int min_angle_bottom = -275;
 
-unsigned long last_move_time = 0;
-
 int current_angle_top = 0;
 int current_angle_bottom = 0;
 
@@ -114,17 +112,21 @@ if(Serial.available()){
     u8_serial_in_receipt = 0;
     }
 
-  if(desired_angle_top >= min_angle_top && desired_angle_top <= max_angle_top && desired_angle_bottom >= min_angle_bottom && desired_angle_bottom <= max_angle_bottom && millis()- last_move_time > 10000){
-    last_move_time = millis();
+  if(desired_angle_top >= min_angle_top && desired_angle_top <= max_angle_top && desired_angle_bottom >= min_angle_bottom && desired_angle_bottom <= max_angle_bottom){
 
       int angle_to_move_top = desired_angle_top - current_angle_top;
       int angle_to_move_bottom = desired_angle_bottom - current_angle_bottom;
 
+      if(angle_to_move_top !=0 || angle_to_move_bottom != 0){
       moveAngleTop(angle_to_move_top);
       moveAngleBottom(angle_to_move_bottom);
-
+      
       current_angle_top = desired_angle_top;
       current_angle_bottom = desired_angle_bottom;
+
+      Serial.print('d');
+  
+  }
 
     
     }

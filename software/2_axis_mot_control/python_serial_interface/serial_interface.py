@@ -25,7 +25,7 @@ ser_1 = serial.Serial(arduino_ports[0], baudrate = 115200, timeout = 0.1)
 desired_rotation_top = 100 #10 degrees
 desired_rotation_bottom = 100 #10 degrees
 while(1):
-    if(ser_1.in_waiting > 0):
+    if(ser_1.in_waiting > 0): #c means confirm receipt, r means ready after startup, d means finished movement. 
         read_byte = ser_1.read(1)
         # Define independent variables
         print(read_byte)
