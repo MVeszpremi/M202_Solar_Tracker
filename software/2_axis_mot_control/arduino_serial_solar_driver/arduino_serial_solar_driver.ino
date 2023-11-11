@@ -1,4 +1,5 @@
 #include <TMC2209.h>
+//MUST INSTQALL TMC2209 by Peter Polidoro
 
 // This example will not work on Arduino boards without HardwareSerial ports,
 // such as the Uno, Nano, and Mini.
@@ -72,7 +73,7 @@ void setup()
   calibrateTopMotorAndCenter();
   calibrateBottomMotorAndCenter();
 
-  Serial.println("rdy");
+  Serial.print("r");
 }
 
 void loop()
@@ -85,7 +86,7 @@ if(Serial.available()){
     s_serial_input = "";
     }else if(r == 'b' && u8_serial_in_receipt == 1){
       u8_serial_in_receipt = 2;
-      Serial.println(s_serial_input);
+      Serial.print('c');
       }else if(u8_serial_in_receipt == 1){
         s_serial_input += r;
         }
@@ -116,9 +117,6 @@ if(Serial.available()){
 
       int angle_to_move_top = desired_angle_top - current_angle_top;
       int angle_to_move_bottom = desired_angle_bottom - current_angle_bottom;
-
-      Serial.println(angle_to_move_top);
-      Serial.println(angle_to_move_bottom);
 
       moveAngleTop(angle_to_move_top);
       moveAngleBottom(angle_to_move_bottom);
