@@ -12,6 +12,8 @@
 
 HardwareSerial & serial_stream = Serial3;
 
+#define PWR_LOG_INTERVAL 5000
+
 const uint8_t STEP_PIN = 5; //7
 const uint8_t DIRECTION_PIN = 4; //6
 const uint8_t STEP_PIN_TOP = 7; //7
@@ -36,6 +38,7 @@ int desired_angle_bottom = 0;
 String s_serial_input = "";
 uint8_t u8_serial_in_receipt = 0;
 
+unsigned long timer1_time = 0; //timer for periodic voltage measurment of panel when not moving.
 
 // current values may need to be reduced to prevent overheating depending on
 // specific motor and power supply voltage
@@ -78,6 +81,21 @@ void setup()
 
 void loop()
 {
+
+  if(timer1_time <= millis()){
+    timer1_time = millis() + PWR_LOG_INTERVAL;
+    uint32_t read_avg = 0;
+    for (int i = 0; i < 50; i++){
+      read_avg += analogRead(A0);
+      delay(10);
+    }//measure over 500ms.
+    Serial.print('p');
+    char buf[5];
+    sprintf( buf, "%04d", read_avg/50);
+    Serial.print( buf );
+    Serial.print('q');
+
+  }
  
 if(Serial.available()){
   char r = Serial.read();
