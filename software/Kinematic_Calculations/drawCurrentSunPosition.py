@@ -3,16 +3,23 @@ import numpy as np
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import pvlib
 from datetime import datetime
+from pvlib import solarposition, tracking
+import math
+import pandas as pd
+from shapely.geometry import Point, Polygon
+from pvlib.location import Location
+import pytz
 
-# Function to convert spherical to cartesian coordinates
-def spherical_to_cartesian(azimuth, elevation):
+
+def spherical_to_cartesian(zenith, azimuth):
     r = 1  # unit sphere
-    azimuth_rad = np.radians(azimuth)
-    elevation_rad = np.radians(90 - elevation)  # Convert to colatitude
-    x = r * np.sin(elevation_rad) * np.cos(azimuth_rad)
-    y = r * np.sin(elevation_rad) * np.sin(azimuth_rad)
-    z = r * np.cos(elevation_rad)
+    azimuth_rad = np.radians(360 - azimuth)  # Clockwise from North
+    zenith_rad = np.radians(zenith)
+    x = r * np.sin(zenith_rad) * np.cos(azimuth_rad)
+    y = r * np.sin(zenith_rad) * np.sin(azimuth_rad)
+    z = r * np.cos(zenith_rad)
     return x, y, z
+
 
 # Function to calculate rectangle vertices
 def calculate_centered_rectangle_vertices(x, y, z, width, height):
@@ -46,15 +53,20 @@ while True:
     # Get current date and time
     current_time = datetime.now()
 
-    # Get solar position
-    solpos = pvlib.solarposition.get_solarposition(current_time, latitude, longitude)
+    site = Location(latitude, longitude, 'America/Los_Angeles', 93, 'Los Angeles')
+    site_tz = pytz.timezone('America/Los_Angeles')
+    end_time = pd.Timestamp.now(tz=site_tz)
+    start_time = end_time - pd.Timedelta(days=1)
+   # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
-    # Sun's azimuth and altitude
-    azimuth = solpos['azimuth'].iloc[0]
-    altitude = solpos['apparent_elevation'].iloc[0]
+    solpos = solarposition.get_solarposition(end_time, site.latitude, site.longitude, site.altitude)
+
+    
+    solar_zenith = solpos['zenith'].iloc[0]
+    solar_azimuth = solpos['azimuth'].iloc[0]
 
     # Convert to 3D coordinates
-    x, y, z = spherical_to_cartesian(azimuth, altitude)
+    x, y, z = spherical_to_cartesian(solar_zenith, solar_azimuth)
 
     # Clear previous data
     ax.clear()
@@ -62,12 +74,23 @@ while True:
     # Redraw the elements
 
     # Equator line
-    u_eq = np.linspace(0, 2 * np.pi, 100)
+   # Equator line drawn clockwise
+    u_eq = np.linspace(0, 2 * np.pi, 100)  
     ax.plot(np.cos(u_eq), np.sin(u_eq), 0, color="b", alpha=0.3)
 
-    # Four dome lines
+    # Define compass points (updated for clockwise azimuth)
+    compass_points = {'N': 0, 'E': 270, 'S': 180, 'W': 90}
+
+    # Label compass points
+    for point, angle in compass_points.items():
+        angle_rad = np.radians(angle)
+        label_x = np.cos(angle_rad)
+        label_y = np.sin(angle_rad)
+        ax.text(label_x, label_y, 0, point, color="red", fontsize=12, ha='center', va='center')
+
+    # Four dome lines (updated for clockwise azimuth)
     v_dom = np.linspace(0, np.pi, 100)
-    for angle in [0, 90, 180, 270]:
+    for angle in [0, 270, 180, 90]:
         angle_rad = np.radians(angle)
         ax.plot(np.cos(angle_rad) * np.sin(v_dom), np.sin(angle_rad) * np.sin(v_dom), np.cos(v_dom), color="b", alpha=0.3)
 
