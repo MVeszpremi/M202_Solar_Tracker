@@ -21,23 +21,60 @@ def spherical_to_cartesian(zenith, azimuth):
     return x, y, z
 
 
-# Function to calculate rectangle vertices
-def calculate_centered_rectangle_vertices(x, y, z, width, height):
-    sun_direction = np.array([x, y, z])
+# # Function to calculate rectangle vertices
+# def calculate_centered_rectangle_vertices(x, y, z, width, height):
+#     sun_direction = np.array([x, y, z])
+#     sun_direction /= np.linalg.norm(sun_direction)
+#     if sun_direction[2] != 1:
+#         perp_vector1 = np.cross(sun_direction, [0, 0, 1])
+#     else:
+#         perp_vector1 = np.cross(sun_direction, [0, 1, 0])
+#     perp_vector1 /= np.linalg.norm(perp_vector1)
+#     perp_vector2 = np.cross(sun_direction, perp_vector1)
+#     half_width = width / 2
+#     half_height = height / 2
+#     v1 = half_width * perp_vector1 + half_height * perp_vector2
+#     v2 = -half_width * perp_vector1 + half_height * perp_vector2
+#     v3 = -half_width * perp_vector1 - half_height * perp_vector2
+#     v4 = half_width * perp_vector1 - half_height * perp_vector2
+#     return [v1, v2, v3, v4]
+
+
+def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
+    sun_direction = np.array([sun_x, sun_y, sun_z])
     sun_direction /= np.linalg.norm(sun_direction)
-    if sun_direction[2] != 1:
-        perp_vector1 = np.cross(sun_direction, [0, 0, 1])
-    else:
-        perp_vector1 = np.cross(sun_direction, [0, 1, 0])
-    perp_vector1 /= np.linalg.norm(perp_vector1)
-    perp_vector2 = np.cross(sun_direction, perp_vector1)
+
+    # Pitch: Angle between the sun direction projection on YZ plane and Y-axis
+    pitch = -np.arctan2(sun_direction[2], sun_direction[1])
+
+    # Apply pitch rotation (around X-axis)
+    rot_x = np.array([[1, 0, 0],
+                      [0, np.cos(pitch), -np.sin(pitch)],
+                      [0, np.sin(pitch), np.cos(pitch)]])
+    sun_direction_pitch_rotated = np.dot(rot_x, sun_direction)
+
+    # Yaw: Angle between the sun direction projection on XY plane and X-axis
+    yaw =180-np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
+
+    # Apply yaw rotation (around Y-axis)
+    rot_y = np.array([[np.cos(yaw), 0, np.sin(yaw)],
+                      [0, 1, 0],
+                      [-np.sin(yaw), 0, np.cos(yaw)]])
+    sun_direction_yaw_rotated = np.dot(rot_y, sun_direction_pitch_rotated)
+
+    # Define initial rectangle in the XY plane
     half_width = width / 2
     half_height = height / 2
-    v1 = half_width * perp_vector1 + half_height * perp_vector2
-    v2 = -half_width * perp_vector1 + half_height * perp_vector2
-    v3 = -half_width * perp_vector1 - half_height * perp_vector2
-    v4 = half_width * perp_vector1 - half_height * perp_vector2
-    return [v1, v2, v3, v4]
+    rectangle = np.array([[half_width, half_height, 0],
+                          [-half_width, half_height, 0],
+                          [-half_width, -half_height, 0],
+                          [half_width, -half_height, 0]])
+
+    # Apply pitch and yaw rotations
+    rectangle = np.dot(rectangle, rot_x.T)
+    rectangle = np.dot(rectangle, rot_y.T)
+
+    return rectangle
 
 # Location details (Los Angeles, USA)
 latitude = 34.05
@@ -108,9 +145,9 @@ while True:
     ax.add_collection3d(rectangle)
 
     # Axis labels
-    ax.set_xlabel('')
-    ax.set_ylabel('')
-    ax.set_zlabel('')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
 
     # Degree angles for azimuth and elevation
     for angle in range(0, 360, 30):
