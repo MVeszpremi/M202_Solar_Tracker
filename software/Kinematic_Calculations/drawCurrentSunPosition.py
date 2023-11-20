@@ -45,7 +45,9 @@ def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
     sun_direction /= np.linalg.norm(sun_direction)
 
     # Pitch: Angle between the sun direction projection on YZ plane and Y-axis
-    pitch = -np.arctan2(sun_direction[2], sun_direction[1])
+
+    pitch = -np.arctan2(sun_direction[1], sun_direction[2])
+    print(pitch*180/np.pi)
 
     # Apply pitch rotation (around X-axis)
     rot_x = np.array([[1, 0, 0],
@@ -93,10 +95,10 @@ while True:
     site = Location(latitude, longitude, 'America/Los_Angeles', 93, 'Los Angeles')
     site_tz = pytz.timezone('America/Los_Angeles')
     end_time = pd.Timestamp.now(tz=site_tz)
-    start_time = end_time - pd.Timedelta(days=1)
+    start_time = end_time - pd.Timedelta(hours=5)
    # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
-    solpos = solarposition.get_solarposition(end_time, site.latitude, site.longitude, site.altitude)
+    solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)
 
     
     solar_zenith = solpos['zenith'].iloc[0]
