@@ -53,8 +53,8 @@ def update_data(data_point):
     plt.draw()
     plt.pause(0.01)
 
-desired_rotation_top = 100 #10 degrees
-desired_rotation_bottom = 100 #10 degrees
+desired_rotation_y = 100 #10 degrees
+desired_rotation_x = 100 #10 degrees X AXIS FACED NORTH
 
 
 device_state = 0 #0 ready # 1 moving #3 error moving
@@ -65,7 +65,7 @@ while(1):
         # Define independent variables
         print(read_byte)
         if(read_byte == b'r'):
-            ser_1.write(str.encode('a{0},{1}b'.format(desired_rotation_top, desired_rotation_bottom)))
+            ser_1.write(str.encode('a{0},{1}b'.format(desired_rotation_y, desired_rotation_x)))
             print('sent test movmement')
         elif(read_byte == b'c'):
             print('comfirmed rec by device')

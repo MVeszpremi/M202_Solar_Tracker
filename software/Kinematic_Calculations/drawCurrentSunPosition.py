@@ -39,6 +39,16 @@ def spherical_to_cartesian(zenith, azimuth):
 #     v4 = half_width * perp_vector1 - half_height * perp_vector2
 #     return [v1, v2, v3, v4]
 
+def clamp(value, min_value, max_value):
+    """
+    Clamps the 'value' to be within the range defined by 'min_value' and 'max_value'.
+    
+    :param value: The value to be clamped.
+    :param min_value: The minimum allowable value.
+    :param max_value: The maximum allowable value.
+    :return: The clamped value.
+    """
+    return max(min_value, min(value, max_value))
 
 def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
     sun_direction = np.array([sun_x, sun_y, sun_z])
@@ -48,6 +58,8 @@ def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
 
     pitch = -np.arctan2(sun_direction[1], sun_direction[2])
 
+    pitch = clamp(pitch, (-27.5)*(np.pi/180), 27.5*(np.pi/180))
+
     # Apply pitch rotation (around X-axis)
     rot_x = np.array([[1, 0, 0],
                       [0, np.cos(pitch), -np.sin(pitch)],
@@ -55,8 +67,9 @@ def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
     sun_direction_pitch_rotated = np.dot(rot_x, sun_direction)
 
     # Yaw: Angle between the sun direction projection on XY plane and X-axis
-    yaw =180-np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
-
+    yaw =np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
+    yaw = clamp(yaw, -60.0*(np.pi/180), 27.5*(np.pi/180))
+    print(f"yaw (x):{yaw*(180/np.pi)}, pitch(y):{pitch*(180/np.pi)}")
     # Apply yaw rotation (around Y-axis)
     rot_y = np.array([[np.cos(yaw), 0, np.sin(yaw)],
                       [0, 1, 0],
@@ -94,10 +107,10 @@ while True:
     site = Location(latitude, longitude, 'America/Los_Angeles', 93, 'Los Angeles')
     site_tz = pytz.timezone('America/Los_Angeles')
     end_time = pd.Timestamp.now(tz=site_tz)
-    start_time = end_time - pd.Timedelta(hours=5)
+    start_time = end_time - pd.Timedelta(hours=9)
    # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
-    solpos = solarposition.get_solarposition(end_time, site.latitude, site.longitude, site.altitude)
+    solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)
 
     
     solar_zenith = solpos['zenith'].iloc[0]
@@ -139,8 +152,8 @@ while True:
     ax.plot([0, x], [0, y], [0, z], color='red')
 
     # Rectangle
-    rectangle_width = 0.2
-    rectangle_height = 0.4
+    rectangle_width = 0.4
+    rectangle_height = 0.2
     rectangle_vertices = calculate_centered_rectangle_vertices(x, y, z, rectangle_width, rectangle_height)
     rectangle = Poly3DCollection([rectangle_vertices], color='cyan', alpha=0.6)
     ax.add_collection3d(rectangle)

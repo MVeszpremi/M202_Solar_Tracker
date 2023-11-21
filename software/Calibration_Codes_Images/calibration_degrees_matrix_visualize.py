@@ -23,11 +23,11 @@ X, Y = np.meshgrid(range(image_width), range(image_height))
 
 # Now, draw the grid lines
 # Draw horizontal lines
-for i in range(15, image_height, 5):  # Adjust the step size to your preference
+for i in range(15, image_height, 25):  # Adjust the step size to your preference
     ax.plot(degree_matrix[i, :, 0], degree_matrix[i, :, 1], color='blue', linewidth=0.5)
 
 # Draw vertical lines
-for j in range(10, image_width, 5):  # Adjust the step size to your preference
+for j in range(10, image_width, 25):  # Adjust the step size to your preference
     ax.plot(degree_matrix[:, j, 0], degree_matrix[:, j, 1], color='blue', linewidth=0.5)
 
 # Invert the Y axis since image coordinates are top left, but plot is bottom left
