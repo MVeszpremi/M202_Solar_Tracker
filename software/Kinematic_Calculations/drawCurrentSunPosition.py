@@ -110,7 +110,7 @@ while True:
     start_time = end_time - pd.Timedelta(hours=9)
    # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
-    solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)
+    solpos = solarposition.get_solarposition(end_time, site.latitude, site.longitude, site.altitude)
 
     
     solar_zenith = solpos['zenith'].iloc[0]
