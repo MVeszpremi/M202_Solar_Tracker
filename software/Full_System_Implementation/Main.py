@@ -1,17 +1,24 @@
-import DataPlotter
-import SerialCommunication
-import SphericalDiagramUpdater
+from SunPositionDrawer import SunPositionDrawer
+from ArduinoSerialInterface import ArduinoSerialInterface
+import time
 
 class Main:
     def __init__(self):
-        self.spherical_updater = SphericalDiagramUpdater(latitude=34.05, longitude=-118.25)
-        self.serial_communication = SerialCommunication(desired_rotation_y=100, desired_rotation_x=100)
-        self.data_plotter = DataPlotter()
+        self.sun_drawer = SunPositionDrawer()
+        self.arduino_interface = ArduinoSerialInterface()
 
-    def start_system(self):
-        self.spherical_updater.start()
-        self.serial_communication.start()
+
+    def periodic_task_5_second(self):
+        self.sun_drawer.run()
+
+    def run(self):
+        last_called = time.time()-5
+        while True:
+            self.arduino_interface.run()
+            if time.time() - last_called > 5:
+                self.periodic_task_5_second()  # Call the periodic function
+                last_called = time.time()  # Reset the timer
 
 if __name__ == "__main__":
-    main_system = Main()
-    main_system.start_system()
+    main = Main()
+    main.run()
