@@ -20,7 +20,6 @@ class SunPositionDrawer ():
         self.longitude = longitude
         self.rot_x = 0
         self.rot_y = 0
-        plt.ion()  # Turn on interactive mode
         fig = plt.figure()
         self.ax = fig.add_subplot(111, projection='3d')
 
@@ -96,7 +95,7 @@ class SunPositionDrawer ():
         # Title
         self.ax.set_title('Live Sun Position on Spherical Coordinates')
         plt.draw()
-        plt.pause(0.1)
+        plt.pause(0.001)
 
 
     def clamp(self, value, min_value, max_value):

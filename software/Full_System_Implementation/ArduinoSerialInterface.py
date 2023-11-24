@@ -33,15 +33,16 @@ class ArduinoSerialInterface:
             exit(0)
         self.serial_port = arduino_ports[0]
         print(self.serial_port)
-        time.sleep(2)
         self.ser = serial.Serial(self.serial_port, baudrate = self.baudrate, timeout = self.timeout)
 
     def _setup_plot(self):
-        plt.ion()  # Enable interactive mode
         self.fig, self.ax = plt.subplots()
         self.line, = self.ax.plot([], [])  # Initialize a line plot
         plt.xlabel('Time')
         plt.ylabel('Voltage')
+        plt.title('Real-Time Power Plot')
+        self.ax.xaxis.set_major_formatter(mdates.DateFormatter('%d:%H:%M:%S'))
+        plt.xticks(rotation=45, ha='right')  # ha is short for horizontalalignment
 
 
 
@@ -54,11 +55,11 @@ class ArduinoSerialInterface:
         self.ax.relim()
         self.ax.autoscale_view(True, True, True)
         plt.draw()
-        plt.pause(0.01)
+        plt.pause(0.001)
 
     def run(self):
-        if(self.serial_port.in_waiting > 0): #c means confirm receipt, r means ready after startup, d means finished movement. 
-            read_byte = self.serial_port.read(1)
+        if(self.ser.in_waiting > 0): #c means confirm receipt, r means ready after startup, d means finished movement. 
+            read_byte = self.ser.read(1)
             # Define independent variables
             print(read_byte)
             if(read_byte == b'r'):
@@ -72,7 +73,7 @@ class ArduinoSerialInterface:
                 device_state = 0
             elif(read_byte == b'p'):
                 print('power reporting')
-                read_data = self.serial_port.read(5)
+                read_data = self.ser.read(5)
                 print(read_data)
                 if read_data.endswith(b'q'):
                     # Convert the rest to a number
@@ -82,7 +83,7 @@ class ArduinoSerialInterface:
                     self.update_data(voltage)
 
     def moveToAngle(self,angle_y, angle_x):
-        self.serial_port.write(str.encode('a{0},{1}b'.format(angle_y, angle_x)))
+        self.ser.write(str.encode('a{0},{1}b'.format(angle_y, angle_x)))
 
         
 
