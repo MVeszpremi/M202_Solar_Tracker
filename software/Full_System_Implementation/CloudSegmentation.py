@@ -30,7 +30,9 @@ class CloudSegmentation ():
         ret, frame = self.cap.read()
 
         if ret:
-            self.sky_image = frame  # Store the captured image in the variable
+            # Scale down the image by a factor of two
+            scaled_frame = cv2.resize(frame, (frame.shape[1] // 2, frame.shape[0] // 2))
+            self.sky_image = scaled_frame  # Store the scaled image in the variable
         else:
             print("Failed to capture image")
 
@@ -81,6 +83,19 @@ class CloudSegmentation ():
         sorted_contours = sorted(contours, key=cv2.contourArea, reverse=True)[:3]
 
         for cloud in sorted_contours:
+
+            M = cv2.moments(cloud)
+            if M["m00"] != 0:
+                cX = int(M["m10"] / M["m00"])
+                cY = int(M["m01"] / M["m00"])
+                font = cv2.FONT_HERSHEY_PLAIN
+                font_color = (0, 0, 255)  # BGR color (e.g., red is (0, 0, 255))
+                # Calculate the font thickness (optional)
+                font_thickness = 1
+                # Calculate the font scale based on font size
+                font_scale = 2
+                image = cv2.putText(image, ('('+str(round(self.degree_matrix[cY, cX, 0])) + ', '+str(round(self.degree_matrix[cY, cX, 1])) +')'), (cX, cY), font, font_scale, font_color, font_thickness)
+            
             epsilon = 0.01 * cv2.arcLength(cloud, True)
             polygon = cv2.approxPolyDP(cloud, epsilon, True)
 

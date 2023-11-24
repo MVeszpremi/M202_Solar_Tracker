@@ -119,7 +119,9 @@ def draw_hexagon_around_biggest_cloud(image, mask):
     # If no contours are found, return the original image
     if not contours:
         return image
-
+    
+    image = cv2.putText(image, ('('+str(round(degree_matrix[y, x, 0])) + ', '+str(round(degree_matrix[y, x, 1])) +')'), (x, y), font, font_scale, font_color, font_thickness)
+    
     # Sort contours by area and get the biggest one
     biggest_cloud = max(contours, key=cv2.contourArea)
 
