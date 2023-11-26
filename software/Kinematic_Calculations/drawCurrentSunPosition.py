@@ -73,6 +73,8 @@ def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
 
     # Yaw: Angle between the sun direction projection on XY plane and X-axis
     yaw = np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
+    yaw_arctan = np.arctan(sun_direction_pitch_rotated[0]/sun_direction_pitch_rotated[2])
+    print(yaw_arctan * (180/np.pi))
     yaw = clamp(yaw, -60.0*(np.pi/180), 27.5*(np.pi/180))
     print(f"yaw (x):{yaw*(180/np.pi)}, pitch(y):{pitch*(180/np.pi)}")
     # Apply yaw rotation (around Y-axis)
@@ -112,7 +114,7 @@ while True:
     site = Location(latitude, longitude, 'America/Los_Angeles', 93, 'Los Angeles')
     site_tz = pytz.timezone('America/Los_Angeles')
     end_time = pd.Timestamp.now(tz=site_tz)
-    start_time = end_time - pd.Timedelta(hours=2)
+    start_time = end_time - pd.Timedelta(hours=9)
    # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
     solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)

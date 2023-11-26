@@ -20,8 +20,8 @@ class SunPositionDrawer ():
         self.longitude = longitude
         self.rot_x = 0
         self.rot_y = 0
-        self.rot_x_raw = 0
-        self.rot_y_raw = 0
+        self.rot_x_err = 0
+        self.rot_y_err = 0
         fig = plt.figure()
         self.ax = fig.add_subplot(111, projection='3d')
 
@@ -124,7 +124,6 @@ class SunPositionDrawer ():
         if(sun_direction[1] > 0 ):
             pitch = pitch * -1
 
-        self.rot_y_raw = pitch*(180/np.pi)
         pitch = self.clamp(pitch, (-27.5)*(np.pi/180), 27.5*(np.pi/180))
 
         # Apply pitch rotation (around X-axis)
@@ -135,8 +134,8 @@ class SunPositionDrawer ():
 
         # Yaw: Angle between the sun direction projection on XY plane and X-axis
         yaw = np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
-        self.rot_x_raw = yaw*(180/np.pi)
         yaw = self.clamp(yaw, -60.0*(np.pi/180), 27.5*(np.pi/180))
+        
         self.rot_x = yaw*(180/np.pi)
         self.rot_y = pitch*(180/np.pi)
         # Apply yaw rotation (around Y-axis)
@@ -157,16 +156,40 @@ class SunPositionDrawer ():
         rectangle = np.dot(rectangle, rot_x.T)
         rectangle = np.dot(rectangle, rot_y.T)
 
+        self.rot_x_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[1] * (180/np.pi)
+        self.rot_y_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[0] * (180/np.pi)
+
         return rectangle
     
+    def calculate_pitch_yaw_error(self, rectangle, x, y, z):
+        # Construct the point from individual coordinates
+        point = np.array([x, y, z])
+
+        # Calculate the normal of the rectangle
+        # Assuming rectangle is a list of 3D points (vertices)
+        v1 = rectangle[1] - rectangle[0]
+        v2 = rectangle[2] - rectangle[0]
+        normal = np.cross(v1, v2)
+        normal = normal / np.linalg.norm(normal)
+
+        # Direction vector from rectangle to point
+        direction = point - rectangle[0]
+        direction = direction / np.linalg.norm(direction)
+
+        # Calculate pitch and yaw error
+        pitch_error = np.arcsin(np.dot(normal, direction))  # Simplified computation
+        yaw_error = np.arctan2(direction[1], direction[0]) - np.arctan2(normal[1], normal[0])
+
+        return pitch_error, yaw_error
+
     def getRotX(self):
         return self.rot_x
 
     def getRotY(self):
         return self.rot_y
     
-    def getRotXRaw(self):
-        return self.rot_x_raw
+    def getRotXErr(self):
+        return self.rot_x_err
     
-    def getRotYRaw(self):
-        return self.rot_y_raw
+    def getRotYErr(self):
+        return self.rot_y_err

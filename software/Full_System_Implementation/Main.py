@@ -23,8 +23,8 @@ class Main:
 
     def periodic_task_2_second(self):
         print(f"CLAMPED: yaw (x):{self.sun_drawer.getRotX()}, pitch(y):{self.sun_drawer.getRotY()}")
-        print(f"RAW: yaw (x):{self.sun_drawer.getRotXRaw()}, pitch(y):{self.sun_drawer.getRotYRaw()}")
-        print(f"Difference camera x,y: ({self.sun_drawer.getRotXRaw()-self.sun_drawer.getRotX()},{self.sun_drawer.getRotYRaw()-self.sun_drawer.getRotY()})")
+        print(f"ERR    : yaw (x):{self.sun_drawer.getRotXErr()}, pitch(y):{self.sun_drawer.getRotYErr()}")
+       
 
     def run(self):
         last_called = time.time()
