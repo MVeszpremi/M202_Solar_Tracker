@@ -16,8 +16,8 @@ class CloudSegmentation ():
         # Initialize the webcam feed
         self.cap = cv2.VideoCapture(0)  # '0' is usually the default value for the primary camera
         self.degree_matrix = np.load(degree_matrix_path)
-        self.ang_x = 0
-        self.ang_y = 0
+        self.ang_x_err = 0
+        self.ang_y_err = 0
         print("loaded camera angle matrix")
         # Check if the camera opened successfully
         if not self.cap.isOpened():
@@ -42,6 +42,13 @@ class CloudSegmentation ():
             if mask is not None:
                 img = self.draw_hexagon_around_clouds(self.sky_image, mask)
                 
+                y, x = self.find_closest(-1*self.ang_x_err, 0)
+
+                color = (0, 255, 255)  # Yellow in BGR format
+                radius = 5  # Radius of 5 to create a dot of size 10
+
+                # Draw the circle
+                cv2.circle(img, (x,y), radius, color, -1)
                 # Show the image if img is not None
                 if img is not None:
                     cv2.imshow('Mask', img)
@@ -53,6 +60,19 @@ class CloudSegmentation ():
             print("No image available.")
 
             
+    def find_closest(self, find_closest_x, find_closest_y):
+        min_distance = float('inf')
+        closest_i, closest_j = -1, -1
+
+        for i in range(self.degree_matrix.shape[0]):
+            for j in range(self.degree_matrix.shape[1]):
+                x, y = self.degree_matrix[i, j]
+                distance = np.sqrt((x - find_closest_x) ** 2 + (y - find_closest_y) ** 2)
+                if distance < min_distance:
+                    min_distance = distance
+                    closest_i, closest_j = i, j
+
+        return closest_i, closest_j
 
 
     def create_cloud_mask(self, image):
@@ -112,6 +132,6 @@ class CloudSegmentation ():
         self.cap.release()
         cv2.destroyAllWindows()
 
-    def setAngle(self,ang_x, ang_y):
-        self.ang_x = ang_x
-        self.ang_y = ang_y
+    def setErrAngle(self,ang_x, ang_y):
+        self.ang_x_err = ang_x
+        self.ang_y_err = ang_y

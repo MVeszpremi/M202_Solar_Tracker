@@ -19,7 +19,7 @@ class Main:
         self.cloud_segmentation.capture_image()
         self.cloud_segmentation.processForClouds()
         self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
-        self.cloud_segmentation.setAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
+        self.cloud_segmentation.setErrAngle(self.sun_drawer.getRotXErr(), self.sun_drawer.getRotYErr())
 
     def periodic_task_2_second(self):
         print(f"CLAMPED: yaw (x):{self.sun_drawer.getRotX()}, pitch(y):{self.sun_drawer.getRotY()}")

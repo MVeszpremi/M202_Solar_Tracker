@@ -32,10 +32,10 @@ class SunPositionDrawer ():
         site = Location(self.latitude, self.longitude, 'America/Los_Angeles', 93, 'Los Angeles')
         site_tz = pytz.timezone('America/Los_Angeles')
         end_time = pd.Timestamp.now(tz=site_tz)
-        start_time = end_time - pd.Timedelta(hours=9)
+        start_time = end_time - pd.Timedelta(hours=3)
     # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
-        solpos = solarposition.get_solarposition(end_time, site.latitude, site.longitude, site.altitude)
+        solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)
 
         
         solar_zenith = solpos['zenith'].iloc[0]
