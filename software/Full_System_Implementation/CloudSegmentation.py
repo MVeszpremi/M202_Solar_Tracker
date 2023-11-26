@@ -45,8 +45,6 @@ class CloudSegmentation ():
                 # Show the image if img is not None
                 if img is not None:
                     cv2.imshow('Mask', img)
-                    cv2.waitKey(0)  # Waits indefinitely until a key is pressed
-                    cv2.destroyAllWindows()
                 else:
                     print("Failed to draw hexagon around clouds.")
             else:

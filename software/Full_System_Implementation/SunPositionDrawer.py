@@ -20,6 +20,8 @@ class SunPositionDrawer ():
         self.longitude = longitude
         self.rot_x = 0
         self.rot_y = 0
+        self.rot_x_raw = 0
+        self.rot_y_raw = 0
         fig = plt.figure()
         self.ax = fig.add_subplot(111, projection='3d')
 
@@ -30,7 +32,7 @@ class SunPositionDrawer ():
         site = Location(self.latitude, self.longitude, 'America/Los_Angeles', 93, 'Los Angeles')
         site_tz = pytz.timezone('America/Los_Angeles')
         end_time = pd.Timestamp.now(tz=site_tz)
-        start_time = end_time - pd.Timedelta(hours=9)
+        start_time = end_time - pd.Timedelta(hours=1)
     # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
         solpos = solarposition.get_solarposition(end_time, site.latitude, site.longitude, site.altitude)
@@ -117,8 +119,8 @@ class SunPositionDrawer ():
 
         # Pitch: Angle between the sun direction projection on YZ plane and Y-axis
 
-        pitch = -np.arctan2(sun_direction[1], sun_direction[2])
-
+        pitch = -(np.pi/2-np.arctan(sun_direction[2]/sun_direction[1]))
+        self.rot_y_raw = pitch*(180/np.pi)
         pitch = self.clamp(pitch, (-27.5)*(np.pi/180), 27.5*(np.pi/180))
 
         # Apply pitch rotation (around X-axis)
@@ -128,9 +130,9 @@ class SunPositionDrawer ():
         sun_direction_pitch_rotated = np.dot(rot_x, sun_direction)
 
         # Yaw: Angle between the sun direction projection on XY plane and X-axis
-        yaw =np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
+        yaw =np.arctan(sun_direction_pitch_rotated[0]/sun_direction_pitch_rotated[2])
+        self.rot_x_raw = yaw*(180/np.pi)
         yaw = self.clamp(yaw, -60.0*(np.pi/180), 27.5*(np.pi/180))
-        print(f"yaw (x):{yaw*(180/np.pi)}, pitch(y):{pitch*(180/np.pi)}")
         self.rot_x = yaw*(180/np.pi)
         self.rot_y = pitch*(180/np.pi)
         # Apply yaw rotation (around Y-axis)
@@ -158,3 +160,9 @@ class SunPositionDrawer ():
 
     def getRotY(self):
         return self.rot_y
+    
+    def getRotXRaw(self):
+        return self.rot_x_raw
+    
+    def getRotYRaw(self):
+        return self.rot_y_raw

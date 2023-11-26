@@ -15,6 +15,8 @@ class ArduinoSerialInterface:
         self.timeout = timeout
         self.serial_port = None
         self.dev_startup = False
+        self.current_x = 0
+        self.current_y = 0
         self.df = pd.DataFrame(columns=['Timestamp', 'Panel Voltage'])
         self._setup_plot()
         self._find_arduino()
@@ -49,9 +51,9 @@ class ArduinoSerialInterface:
     def update_data(self,data_point):
         current_time = datetime.now()
         new_row = pd.DataFrame({'Timestamp': [current_time], 'Panel Voltage': [data_point]})
-        df = pd.concat([df, new_row], ignore_index=True)
-        self.line.set_xdata(df['Timestamp'])
-        self.line.set_ydata(df['Panel Voltage'])
+        self.df = pd.concat([self.df, new_row], ignore_index=True)
+        self.line.set_xdata(self.df['Timestamp'])
+        self.line.set_ydata(self.df['Panel Voltage'])
         self.ax.relim()
         self.ax.autoscale_view(True, True, True)
         plt.draw()
@@ -61,10 +63,10 @@ class ArduinoSerialInterface:
         if(self.ser.in_waiting > 0): #c means confirm receipt, r means ready after startup, d means finished movement. 
             read_byte = self.ser.read(1)
             # Define independent variables
-            print(read_byte)
+          # print(read_byte)
             if(read_byte == b'r'):
                 self.dev_startup = True
-                print('sent test movmement')
+                print('hardware is ready')
             elif(read_byte == b'c'):
                 print('comfirmed rec by device')
                 device_state = 1
@@ -83,7 +85,12 @@ class ArduinoSerialInterface:
                     self.update_data(voltage)
 
     def moveToAngle(self,angle_y, angle_x):
+        angle_y = int(angle_y*10)
+        angle_x = int(-1*angle_x*10)
         self.ser.write(str.encode('a{0},{1}b'.format(angle_y, angle_x)))
+
+    def isDevReady(self):
+        return self.isDevReady
 
         
 
