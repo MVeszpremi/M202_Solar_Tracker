@@ -56,9 +56,13 @@ def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
 
     # Pitch: Angle between the sun direction projection on YZ plane and Y-axis
 
-    pitch = -(np.pi/2-np.arctan(sun_direction[2]/sun_direction[1]))
 
-    #pitch = clamp(pitch, (-27.5)*(np.pi/180), 27.5*(np.pi/180))
+    pitch = (np.pi/2-np.arctan(sun_direction[2]/sun_direction[1]))
+    
+    if(sun_direction[1] > 0 ):
+        pitch = pitch * -1
+
+    pitch = clamp(pitch, (-27.5)*(np.pi/180), 27.5*(np.pi/180))
 
     # Apply pitch rotation (around X-axis)
     rot_x = np.array([[1, 0, 0],
@@ -66,15 +70,16 @@ def calculate_centered_rectangle_vertices(sun_x, sun_y, sun_z, width, height):
                       [0, np.sin(pitch), np.cos(pitch)]])
     sun_direction_pitch_rotated = np.dot(rot_x, sun_direction)
 
+
     # Yaw: Angle between the sun direction projection on XY plane and X-axis
-    yaw =np.arctan(sun_direction_pitch_rotated[0]/sun_direction_pitch_rotated[2])
-   # yaw = clamp(yaw, -60.0*(np.pi/180), 27.5*(np.pi/180))
+    yaw = np.arctan2(sun_direction_pitch_rotated[0], sun_direction_pitch_rotated[2])
+    yaw = clamp(yaw, -60.0*(np.pi/180), 27.5*(np.pi/180))
     print(f"yaw (x):{yaw*(180/np.pi)}, pitch(y):{pitch*(180/np.pi)}")
     # Apply yaw rotation (around Y-axis)
     rot_y = np.array([[np.cos(yaw), 0, np.sin(yaw)],
                       [0, 1, 0],
                       [-np.sin(yaw), 0, np.cos(yaw)]])
-    sun_direction_yaw_rotated = np.dot(rot_y, sun_direction_pitch_rotated)
+
 
     # Define initial rectangle in the XY plane
     half_width = width / 2
@@ -107,7 +112,7 @@ while True:
     site = Location(latitude, longitude, 'America/Los_Angeles', 93, 'Los Angeles')
     site_tz = pytz.timezone('America/Los_Angeles')
     end_time = pd.Timestamp.now(tz=site_tz)
-    start_time = end_time - pd.Timedelta(hours=1)
+    start_time = end_time - pd.Timedelta(hours=2)
    # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
     solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)
