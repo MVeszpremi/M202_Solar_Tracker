@@ -42,7 +42,7 @@ class CloudSegmentation ():
             if mask is not None:
                 img = self.draw_hexagon_around_clouds(self.sky_image, mask)
                 
-                y, x = self.find_closest(-1*self.ang_x_err, 0)
+                y, x = self.find_closest(self.ang_x_err, self.ang_y_err)
 
                 color = (0, 255, 255)  # Yellow in BGR format
                 radius = 5  # Radius of 5 to create a dot of size 10

@@ -32,7 +32,7 @@ class SunPositionDrawer ():
         site = Location(self.latitude, self.longitude, 'America/Los_Angeles', 93, 'Los Angeles')
         site_tz = pytz.timezone('America/Los_Angeles')
         end_time = pd.Timestamp.now(tz=site_tz)
-        start_time = end_time - pd.Timedelta(hours=3)
+        start_time = end_time - pd.Timedelta(hours=4)
     # times = pd.date_range(start=start_time, end=end_time, freq='H', tz=site_tz)
 
         solpos = solarposition.get_solarposition(start_time, site.latitude, site.longitude, site.altitude)
@@ -156,8 +156,8 @@ class SunPositionDrawer ():
         rectangle = np.dot(rectangle, rot_x.T)
         rectangle = np.dot(rectangle, rot_y.T)
 
-        self.rot_x_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[1] * (180/np.pi)
-        self.rot_y_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[0] * (180/np.pi)
+        self.rot_x_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[1]
+        self.rot_y_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[0]
 
         return rectangle
     
@@ -166,7 +166,6 @@ class SunPositionDrawer ():
         point = np.array([x, y, z])
 
         # Calculate the normal of the rectangle
-        # Assuming rectangle is a list of 3D points (vertices)
         v1 = rectangle[1] - rectangle[0]
         v2 = rectangle[2] - rectangle[0]
         normal = np.cross(v1, v2)
@@ -176,11 +175,26 @@ class SunPositionDrawer ():
         direction = point - rectangle[0]
         direction = direction / np.linalg.norm(direction)
 
-        # Calculate pitch and yaw error
-        pitch_error = np.arcsin(np.dot(normal, direction))  # Simplified computation
-        yaw_error = np.arctan2(direction[1], direction[0]) - np.arctan2(normal[1], normal[0])
+        # Calculate pitch error
+        pitch_error = np.arccos(np.clip(np.dot(normal, direction), -1.0, 1.0))
 
-        return pitch_error, yaw_error
+        # Calculate yaw error
+        # Project both the normal and direction onto the XY plane
+        normal_xy = np.array([normal[0], normal[1], 0])
+        direction_xy = np.array([direction[0], direction[1], 0])
+
+        # Normalize the projections
+        normal_xy = normal_xy / np.linalg.norm(normal_xy)
+        direction_xy = direction_xy / np.linalg.norm(direction_xy)
+
+        # Calculate the yaw error using the dot product and cross product
+        yaw_error = np.arccos(np.clip(np.dot(normal_xy, direction_xy), -1.0, 1.0))
+        # Adjust the sign of the yaw error based on the cross product
+        cross_product = np.cross(normal_xy, direction_xy)
+        if cross_product[2] < 0:
+            yaw_error = -yaw_error
+
+        return np.degrees(pitch_error), np.degrees(yaw_error)
 
     def getRotX(self):
         return self.rot_x
