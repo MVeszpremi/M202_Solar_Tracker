@@ -1,16 +1,19 @@
 from SunPositionDrawer import SunPositionDrawer
 from ArduinoSerialInterface import ArduinoSerialInterface
 from CloudSegmentation import CloudSegmentation
+from WeatherChecker import WeatherChecker
 import time
 import matplotlib.pyplot as plt
 import cv2
 
 class Main:
-    def __init__(self):
+    def __init__(self, location_city, api_weather):
         plt.ion()  # Enable interactive mode
         self.sun_drawer = SunPositionDrawer()
         self.arduino_interface = ArduinoSerialInterface()
         self.cloud_segmentation = CloudSegmentation()
+        self.weather_checker = WeatherChecker(api_weather, location_city)
+
 
 
     def periodic_task_10_second(self):
@@ -18,8 +21,13 @@ class Main:
         cv2.destroyAllWindows()
         self.cloud_segmentation.capture_image()
         self.cloud_segmentation.processForClouds()
-        self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
-        self.cloud_segmentation.setErrAngle(self.sun_drawer.getRotXErr(), self.sun_drawer.getRotYErr())
+        current_bad_weather = self.weather_checker.check_current_severe_weather()
+        if current_bad_weather:
+            self.arduino_interface.moveToAngle(-59.0, 0)
+            print("Severe weather is currently present.")
+        else:
+            self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
+            self.cloud_segmentation.setErrAngle(self.sun_drawer.getRotXErr(), self.sun_drawer.getRotYErr())
 
     def periodic_task_2_second(self):
         print(f"CLAMPED: yaw (x):{self.sun_drawer.getRotX()}, pitch(y):{self.sun_drawer.getRotY()}")
@@ -44,5 +52,5 @@ class Main:
 
 
 if __name__ == "__main__":
-    main = Main()
+    main = Main(location_city='Los Angeles', api_weather = '32b8600ccd902c30801c6fe5ac806afa')
     main.run()
