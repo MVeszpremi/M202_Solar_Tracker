@@ -17,6 +17,18 @@ Success metrics include image-based tracking accuracy, angular error rate, respo
 
 # 1. Introduction
 
+Our team is pioneering a camera-based solar tracking system aimed at boosting the effectiveness of solar panel farms and safeguarding them against adverse weather conditions.
+
+Traditional systems rely on analog sensors, which not only limit the scope of sensing but are also costlier. These conventional sensors often cause unnecessary oscillations in the tracking mechanism, leading to energy losses.
+
+Our innovative approach utilizes camera technology to precisely detect cloud positions and estimate the optimal angle for solar panels, thus eliminating the need for superfluous movements. This method is more efficient as it directly identifies the best orientation without resorting to trial-and-error adjustments.
+
+The significance of this project extends beyond immediate efficiency gains; it has the potential to revolutionize the solar energy sector. By enhancing performance and reducing long-term maintenance costs associated with weather-related damage, our system could accelerate the adoption of solar technology, contributing to a more sustainable and greener planet.
+
+However, the project does present challenges. Determining the most effective angle from the camera images, accurately assessing cloud thickness, and identifying cloud cover are complex tasks that we are striving to solve.
+
+
+
 This section should cover the following items:
 
 * Motivation & Objective: What are you trying to do and why? (plain English without jargon)
@@ -31,7 +43,27 @@ This section should cover the following items:
 
 # 3. Technical Approach
 
+Mechanical System
+
+The solar panel positioning system was engineered to automatically align with the sun. It incorporates two Nema 17 Stepper motors, each equipped with a 26:1 gearbox, to ensure precise rotation speed and strong holding torque. At the start of operation, Hall effect sensors (AH3572-SA-7) on each axis are employed for accurate calibration of position. The system's 2-axis tracker, or gimbal, is elevated using slender legs, designed to reduce impact on the ground, and it boasts a sturdy construction with several bearings on each axis.
+
+For mounting the solar panel, the gimbal utilizes six M5 screws. Additionally, a fisheye lens camera is affixed to the side of the solar panel, enabling it to capture wide-angle images of the sky.
+
+Software Technologies
+
+
+On Device Processing
+
+
+
+  Cloud Data
+
+
+
 # 4. Evaluation and Results
+
+Power Data Collection
+
 
 # 5. Discussion and Conclusions
 
