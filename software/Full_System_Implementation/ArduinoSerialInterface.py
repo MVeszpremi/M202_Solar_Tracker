@@ -46,14 +46,36 @@ class ArduinoSerialInterface:
         self.ax.xaxis.set_major_formatter(mdates.DateFormatter('%d:%H:%M:%S'))
         plt.xticks(rotation=45, ha='right')  # ha is short for horizontalalignment
 
+    def _setup_plot(self):
+        self.fig, self.ax = plt.subplots()
+        self.line_voltage, = self.ax.plot([], [], label='Voltage')  # Voltage line
+        self.line_power, = self.ax.plot([], [], label='Power', color='red')  # Power line
+        plt.xlabel('Time')
+        plt.ylabel('Voltage/Power')
+        plt.title('Real-Time Power and Voltage Plot')
+        self.ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
+        plt.xticks(rotation=45, ha='right')
+        plt.legend()  # Add legend
 
-
-    def update_data(self,data_point):
+    def update_data(self, voltage):
         current_time = datetime.now()
-        new_row = pd.DataFrame({'Timestamp': [current_time], 'Panel Voltage': [data_point]})
-        self.df = pd.concat([self.df, new_row], ignore_index=True)
-        self.line.set_xdata(self.df['Timestamp'])
-        self.line.set_ydata(self.df['Panel Voltage'])
+        R1 = 5400.0  # R1 in Ohms
+        R2 = 1200.0  # R2 in Ohms
+        Vin = voltage * (R1 + R2) / R2  # Calculate Vin
+        R_panel = 3.0  # Replace with the actual resistance of your solar panel if known
+
+        # Calculate Power (replace this formula if you have the current value)
+        power = Vin**2 / R_panel if R_panel else 0  # Power calculation
+
+        # Add new rows to DataFrame
+        new_row = {'Timestamp': current_time, 'Panel Voltage': voltage, 'Power': power}
+        self.df = self.df.append(new_row, ignore_index=True)
+
+        # Update plot data
+        self.line_voltage.set_xdata(self.df['Timestamp'])
+        self.line_voltage.set_ydata(self.df['Panel Voltage'])
+        self.line_power.set_xdata(self.df['Timestamp'])
+        self.line_power.set_ydata(self.df['Power'])
         self.ax.relim()
         self.ax.autoscale_view(True, True, True)
         plt.draw()
