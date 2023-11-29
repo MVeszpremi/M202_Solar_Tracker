@@ -2,25 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: site.title }}</title>
+    {% if page.title %}
+    <title>{{ page.title }} | {{ site.title }}</title>
+    {% else %}
+    <title>{{ site.title }}</title>
+    {% endif %}
     
-    <!-- MathJax Script for LaTeX -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Include default Jekyll stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <!-- MathJax for LaTeX support -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
     <header>
-        <h1>{{ site.title }}</h1>
-        <nav>
-            <ul>
-                {% for page in site.pages %}
-                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
+        <!-- Include default header from the theme -->
+        {% include header.html %}
     </header>
 
     <main>
@@ -28,7 +30,8 @@
     </main>
 
     <footer>
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+        <!-- Include default footer from the theme -->
+        {% include footer.html %}
     </footer>
 </body>
 
