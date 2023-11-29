@@ -54,11 +54,11 @@ Software Technologies
 We capture and process images every 10 seconds to identify the centroids of the three largest clouds detected. Concurrently, we track the sun's position, which is continuously mapped onto a spherical coordinate system. Utilizing geometric calculations, we determine the optimal pitch and yaw angles for our solar panel, considering both the sun's position and the panel's mechanical constraints. This process is visually represented in a plot below, and the equations used to calculate the yaw and pitch angles are also detailed.
 
 $$
-\text{pitch} = \frac{\pi}{2} - \arctan\left(\frac{\text{sun\_direction}[2]}{\text{sun\_direction}[1]}\right)
+\text{pitch} = \frac{\pi}{2} - \arctan\left(\frac{\text{sun direction}[2]}{\text{sun direction}[1]}\right)
 $$
 
 $$
-\text{if } (\text{sun\_direction}[1] > 0): \quad \text{pitch} = \text{pitch} \times -1
+\text{if } (\text{sun direction}[1] > 0): \quad \text{pitch} = \text{pitch} \times -1
 $$
 
 $$
@@ -66,7 +66,7 @@ $$
 $$
 
 $$
-\text{rot\_x} = \begin{bmatrix}
+\text{rot x} = \begin{bmatrix}
 1 & 0 & 0 \\
 0 & \cos(\text{pitch}) & -\sin(\text{pitch}) \\
 0 & \sin(\text{pitch}) & \cos(\text{pitch})
@@ -74,7 +74,7 @@ $$
 $$
 
 $$
-\text{yaw} = \arctan2(\text{sun\_direction\_pitch\_rotated}[0], \text{sun\_direction\_pitch\_rotated}[2])
+\text{yaw} = \arctan2(\text{sun direction pitch rotated}[0], \text{sun direction pitch rotated}[2])
 $$
 
 $$
@@ -82,15 +82,15 @@ $$
 $$
 
 $$
-\text{self.rot\_x} = \text{yaw} \times \frac{180}{\pi}
+\text{self.rot x} = \text{yaw} \times \frac{180}{\pi}
 $$
 
 $$
-\text{self.rot\_y} = \text{pitch} \times \frac{180}{\pi}
+\text{self.rot y} = \text{pitch} \times \frac{180}{\pi}
 $$
 
 $$
-\text{rot\_y} = \begin{bmatrix}
+\text{rot y} = \begin{bmatrix}
 \cos(\text{yaw}) & 0 & \sin(\text{yaw}) \\
 0 & 1 & 0 \\
 -\sin(\text{yaw}) & 0 & \cos(\text{yaw})
@@ -98,11 +98,38 @@ $$
 $$
 
 $$
-\text{rectangle} = \text{rectangle} \cdot \text{rot\_x}^T \cdot \text{rot\_y}^T
+\text{rectangle} = \text{rectangle} \cdot \text{rot x}^T \cdot \text{rot y}^T
 $$
 
 
 After computing these angles, we account for any deviations caused by the panel's mechanical limits, referred to as the 'error' offset. Ideally, our panel would directly face the sun under clear skies, but mechanical limitations sometimes prevent this. To accurately locate the sun in the camera image, we calculate the error in the pitch and yaw angles. These calculations are presented below.
+
+Pitch Error:
+
+$$
+\text{pitch error} = \arccos\left( \frac{\text{normal} \cdot \text{direction}}{\|\text{normal}\| \cdot \|\text{direction}\|} \right)
+$$
+
+where
+
+$$
+\text{normal} = \frac{\text{np.cross}(v1, v2)}{\|\text{np.cross}(v1, v2)\|} \quad \text{and} \quad \text{direction} = \frac{\text{point} - \text{rectangle}[0]}{\|\text{point} - \text{rectangle}[0]\|}
+$$
+
+Yaw Error:
+
+$$
+\text{yaw error} = \pm \arccos\left( \frac{\text{normal xy} \cdot \text{direction xy}}{\|\text{normal xy}\| \cdot \|\text{direction xy}\|} \right)
+$$
+
+where
+
+$$
+\text{normal xy} = \frac{[\text{normal}[0], \text{normal}[1], 0]}{\|[\text{normal}[0], \text{normal}[1], 0]\|} \quad \text{and} \quad \text{direction xy} = \frac{[\text{direction}[0], \text{direction}[1], 0]}{\|[\text{direction}[0], \text{direction}[1], 0]\|}
+$$
+
+The sign of yaw error is determined by the Z component of $\text{np.cross}(\text{normal xy}, \text{direction xy})$.
+
 
 Subsequently, we pinpoint the sun's position on the camera image. This is achieved by referring to the degree matrix generated during camera calibration (see Appendix 1.1 Camera Calibration). We iteratively search this matrix to find the closest yaw and pitch angles. The corresponding matrix entry (i,j) is then used to accurately locate the sun within the camera's field of view.
 

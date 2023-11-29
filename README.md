@@ -1,10 +1,10 @@
-# ecem202a_project
-This is repository template for UCLA ECEM202A / CSM213A projects.
+# AI-Enabled Solar Tracker System
+This is the repository for the dual axis tracking system for solar panels. 
 
-Use the folders as follows:
+Navigation:
 
 * doc/ for website content
 * software/ for code used in your project
+* software/Full_System_Implementation the main code running to perform the system operation
 * data/ for data data used in your project
 
-You may add additional folders as necessary.
