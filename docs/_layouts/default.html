@@ -2,17 +2,12 @@
 <html lang="en">
 
 <head>
-    {% if page.title %}
-    <title>{{ page.title }} | {{ site.title }}</title>
-    {% else %}
-    <title>{{ site.title }}</title>
-    {% endif %}
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- Include default Jekyll stylesheet -->
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Based Solar Tracking System</title>
+
+    <!-- Load default Jekyll stylesheet for the theme -->
+    {{ "/assets/css/style.css" | relative_url | stylesheet_tag }}
 
     <!-- MathJax for LaTeX support -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -20,19 +15,13 @@
 </head>
 
 <body>
-    <header>
-        <!-- Include default header from the theme -->
-        {% include header.html %}
-    </header>
+    {% include header.html %}
 
-    <main>
+    <div class="container">
         {{ content }}
-    </main>
+    </div>
 
-    <footer>
-        <!-- Include default footer from the theme -->
-        {% include footer.html %}
-    </footer>
+    {% include footer.html %}
 </body>
 
 </html>
