@@ -54,11 +54,11 @@ Software Technologies
 We capture and process images every 10 seconds to identify the centroids of the three largest clouds detected. Concurrently, we track the sun's position, which is continuously mapped onto a spherical coordinate system. Utilizing geometric calculations, we determine the optimal pitch and yaw angles for our solar panel, considering both the sun's position and the panel's mechanical constraints. This process is visually represented in a plot below, and the equations used to calculate the yaw and pitch angles are also detailed.
 
 $$
-\text{pitch} = \frac{\pi}{2} - \arctan\left(\frac{\text{sun\_direction}[2]}{\text{sun\_direction}[1]}\right)
+\text{pitch} = \frac{\pi}{2} - \arctan\left(\frac{\text{sun direction}[2]}{\text{sun direction}[1]}\right)
 $$
 
 $$
-\text{if } (\text{sun\_direction}[1] > 0): \quad \text{pitch} = \text{pitch} \times -1
+\text{if } (\text{sun direction}[1] > 0): \quad \text{pitch} = \text{pitch} \times -1
 $$
 
 $$
@@ -66,7 +66,7 @@ $$
 $$
 
 $$
-\text{rot\_x} = \begin{bmatrix}
+\text{rot x} = \begin{bmatrix}
 1 & 0 & 0 \\
 0 & \cos(\text{pitch}) & -\sin(\text{pitch}) \\
 0 & \sin(\text{pitch}) & \cos(\text{pitch})
@@ -74,7 +74,7 @@ $$
 $$
 
 $$
-\text{yaw} = \arctan2(\text{sun\_direction\_pitch\_rotated}[0], \text{sun\_direction\_pitch\_rotated}[2])
+\text{yaw} = \arctan2(\text{sun direction pitch rotated}[0], \text{sun direction pitch rotated}[2])
 $$
 
 $$
@@ -98,7 +98,7 @@ $$
 $$
 
 $$
-\text{rectangle} = \text{rectangle} \cdot \text{rot\_x}^T \cdot \text{rot\_y}^T
+\text{rectangle} = \text{rectangle} \cdot \text{rot\_x}^T \cdot \text{rot y}^T
 $$
 
 
