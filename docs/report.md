@@ -104,6 +104,17 @@ $$
 
 After computing these angles, we account for any deviations caused by the panel's mechanical limits, referred to as the 'error' offset. Ideally, our panel would directly face the sun under clear skies, but mechanical limitations sometimes prevent this. To accurately locate the sun in the camera image, we calculate the error in the pitch and yaw angles. These calculations are presented below.
 
+$$
+
+pitch_error = \arccos\left( \frac{\text{normal} \cdot \text{direction}}{\|\text{normal}\| \cdot \|\text{direction}\|} \right)
+where \text{normal} = \frac{\text{np.cross}(v1, v2)}{\|\text{np.cross}(v1, v2)\|} and \text{direction} = \frac{\text{point} - \text{rectangle}[0]}{\|\text{point} - \text{rectangle}[0]\|}.
+
+yaw_error = \pm \arccos\left( \frac{\text{normal\_xy} \cdot \text{direction\_xy}}{\|\text{normal\_xy}\| \cdot \|\text{direction\_xy}\|} \right)
+where \text{normal\_xy} = \frac{[\text{normal}[0], \text{normal}[1], 0]}{\|[\text{normal}[0], \text{normal}[1], 0]\|} and \text{direction\_xy} = \frac{[\text{direction}[0], \text{direction}[1], 0]}{\|[\text{direction}[0], \text{direction}[1], 0]\|}. The sign is determined by the Z component of \text{np.cross}(\text{normal\_xy}, \text{direction\_xy}).
+
+$$
+
+
 Subsequently, we pinpoint the sun's position on the camera image. This is achieved by referring to the degree matrix generated during camera calibration (see Appendix 1.1 Camera Calibration). We iteratively search this matrix to find the closest yaw and pitch angles. The corresponding matrix entry (i,j) is then used to accurately locate the sun within the camera's field of view.
 
 Once the sun's position is pinpointed, we compare the cloud centroids to assess cloud cover. This analysis is conducted using various methods, which are outlined as follows:
