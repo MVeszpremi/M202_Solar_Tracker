@@ -156,3 +156,7 @@ Power Data Collection
 # 5. Discussion and Conclusions
 
 # 6. References
+
+# 7. Appendix
+
+![alt text](data/Calibration_matrix_visualize.png)
