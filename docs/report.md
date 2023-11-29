@@ -43,13 +43,13 @@ This section should cover the following items:
 
 # 3. Technical Approach
 
-Mechanical System
+**Mechanical System**
 
 The solar panel positioning system was engineered to automatically align with the sun. It incorporates two Nema 17 Stepper motors, each equipped with a 26:1 gearbox, to ensure precise rotation speed and strong holding torque. At the start of operation, Hall effect sensors (AH3572-SA-7) on each axis are employed for accurate calibration of position. The system's 2-axis tracker, or gimbal, is elevated using slender legs, designed to reduce impact on the ground, and it boasts a sturdy construction with several bearings on each axis.
 
 For mounting the solar panel, the gimbal utilizes six M5 screws. Additionally, a fisheye lens camera is affixed to the side of the solar panel, enabling it to capture wide-angle images of the sky.
 
-Software Technologies
+**Software Technologies**
 
 We capture and process images every 10 seconds to identify the centroids of the three largest clouds detected. Concurrently, we track the sun's position, which is continuously mapped onto a spherical coordinate system. Utilizing geometric calculations, we determine the optimal pitch and yaw angles for our solar panel, considering both the sun's position and the panel's mechanical constraints. This process is visually represented in a plot below, and the equations used to calculate the yaw and pitch angles are also detailed.
 
@@ -140,7 +140,7 @@ Once the sun's position is pinpointed, we compare the cloud centroids to assess 
 ...
 
 
-On Device Processing
+**On Device Processing**
 
 
 
@@ -159,4 +159,6 @@ Power Data Collection
 
 # 7. Appendix
 
-![alt text](data/Calibration_matrix_visualize.png)
+![alt text](/data/Calibration_matrix_visualize.png)
+
+_Figure 1.1 Fisheye Lens Calibration Visualization_
