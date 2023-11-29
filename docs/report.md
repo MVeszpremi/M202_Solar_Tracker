@@ -82,15 +82,15 @@ $$
 $$
 
 $$
-\text{self.rot\_x} = \text{yaw} \times \frac{180}{\pi}
+\text{self.rot x} = \text{yaw} \times \frac{180}{\pi}
 $$
 
 $$
-\text{self.rot\_y} = \text{pitch} \times \frac{180}{\pi}
+\text{self.rot y} = \text{pitch} \times \frac{180}{\pi}
 $$
 
 $$
-\text{rot\_y} = \begin{bmatrix}
+\text{rot y} = \begin{bmatrix}
 \cos(\text{yaw}) & 0 & \sin(\text{yaw}) \\
 0 & 1 & 0 \\
 -\sin(\text{yaw}) & 0 & \cos(\text{yaw})
@@ -98,7 +98,7 @@ $$
 $$
 
 $$
-\text{rectangle} = \text{rectangle} \cdot \text{rot\_x}^T \cdot \text{rot y}^T
+\text{rectangle} = \text{rectangle} \cdot \text{rot x}^T \cdot \text{rot y}^T
 $$
 
 
