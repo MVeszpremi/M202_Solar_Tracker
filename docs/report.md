@@ -166,6 +166,6 @@ Power Data Collection
 
 # 7. Appendix
 
-![alt text](https://github.com/MVeszpremi/M202_Solar_Tracker/blob/main/docs/media/calib_matrix.png)
+![alt text](https://github.com/MVeszpremi/M202_Solar_Tracker/blob/main/docs/media/calib_matrix.png?raw=true)
 
 _Figure 1.1 Fisheye Lens Calibration Visualization_
