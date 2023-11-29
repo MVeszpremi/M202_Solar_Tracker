@@ -131,7 +131,11 @@ $$
 \text{normal xy} = \frac{[\text{normal}[0], \text{normal}[1], 0]}{\|[\text{normal}[0], \text{normal}[1], 0]\|} \quad \text{and} \quad \text{direction xy} = \frac{[\text{direction}[0], \text{direction}[1], 0]}{\|[\text{direction}[0], \text{direction}[1], 0]\|}
 $$
 
-The sign of yaw error is determined by the Z component of $\text{np.cross}(\text{normal xy}, \text{direction xy})$.
+The sign of yaw error is determined by the Z component of
+
+$$ 
+\text{np.cross}(\text{normal xy}, \text{direction xy})
+$$
 
 
 Subsequently, we pinpoint the sun's position on the camera image. This is achieved by referring to the degree matrix generated during camera calibration (see Appendix 1.1 Camera Calibration). We iteratively search this matrix to find the closest yaw and pitch angles. The corresponding matrix entry (i,j) is then used to accurately locate the sun within the camera's field of view.
