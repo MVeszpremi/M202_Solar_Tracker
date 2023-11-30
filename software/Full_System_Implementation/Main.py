@@ -1,5 +1,5 @@
 from SunPositionDrawer import SunPositionDrawer
-from ArduinoSerialInterface import ArduinoSerialInterface
+from ArduinoSerialInterface import ArduinoSerialInterface, ArduinoSerialInterfaceTesting
 from CloudSegmentation import CloudSegmentation
 from WeatherChecker import WeatherChecker
 from WeatherPredictor import WeatherPredictor
@@ -11,11 +11,10 @@ class Main:
     def __init__(self, location_city, api_weather, svm_classifier):
         plt.ion()  # Enable interactive mode
         self.sun_drawer = SunPositionDrawer()
-        self.arduino_interface = ArduinoSerialInterface()
+        self.arduino_interface = ArduinoSerialInterfaceTesting() #ArduinoSerialInterface()
         self.cloud_segmentation = CloudSegmentation()
         self.weather_checker = WeatherChecker(api_weather, location_city)
         self.weather_predictor = WeatherPredictor(svm_classifier)
-
 
 
     def periodic_task_10_second(self):
