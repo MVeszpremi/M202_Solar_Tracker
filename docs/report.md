@@ -152,8 +152,18 @@ Once the sun's position is pinpointed, we compare the cloud centroids to assess 
 
 
   Cloud Data
+**Weather Dectection**
+The genesis of this project was the conceptualization of a mechanism to position solar panels vertically during unexpected hailstorms and other extreme weather events. This would help mitigate potential financial losses caused by significant property damage. This program goes beyond just protecting assets and demonstrates a wider commitment to innovation.
 
+To achieve this goal, we utilized the OpenWeatherMap API to gather weather data, specifically targeting the identification of circumstances that align with established severe weather parameters. To address the inherent limitations in the accuracy of weather forecasts, a camera system was added to provide an extra layer of verification. Importantly, the camera used was not a typical one, but rather a fisheye version known for its wide field of view, which allowed for thorough sky imaging.
 
+The utilization of a fisheye camera played a crucial role in obtaining a wide-ranging and comprehensive dataset that was essential for training and validating the SVM classifier. A total of around 400 photos were collected, creating a strong basis for the system's prediction precision. The camera's wide field of view was crucial, as it captured large portions of the sky, enabling a comprehensive investigation of different meteorological components. The thorough analysis of the sky's image was crucial for the identification of its characteristics, including brightness, saturation, contrast, and color histograms. This ensured a realistic representation of the vast and varied sky.
+
+The subsequent picture processing entailed utilizing a sequence of advanced analyzers, such as BrightnessAnalyzer, SaturationAnalyzer, ContrastAnalyzer, and ColorHistogramAnalyzer. Each of these analyzers had a vital function in extracting precise image properties, which were then inputted into the SVM classifier. The comprehensive method of combining features greatly improved the classifier's capacity to accurately distinguish between sunny and non-sunny circumstances.
+
+The WeatherPredictor class, which incorporates this sophisticated classifier, exhibited exceptional effectiveness in predicting real-time weather. The device's capacity to understand and analyze images captured by the fisheye camera and provide instant weather forecasts enhances its usefulness in meteorology, environmental monitoring, and integration with smart home systems.
+
+In conclusion, the combination of the fisheye camera and advanced machine learning techniques in this weather forecast system highlights a seamless integration of hardware capabilities and software expertise. The system's ability to provide precise weather forecasts, based on a diverse and extensive dataset, demonstrates the significant impact of machine learning in real-world situations, especially in environmental analysis and meteorological research. Moreover, by utilizing the camera as the main method of verification, the prediction outputs are made more reliable and precise, taking into account the potential flaws of weather forecasts.
 
 # 4. Evaluation and Results
 
