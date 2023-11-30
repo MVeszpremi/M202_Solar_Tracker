@@ -66,7 +66,7 @@ class Main:
 
 
 if __name__ == "__main__":
-    svm_classifier_path = 'path/to/svm_classifier.joblib'  # update the path
+    svm_classifier_path = './svm_classifier.joblib'  # update the path
     svm_classifier = joblib.load(svm_classifier_path)
     main = Main(location_city='Los Angeles', api_weather = '32b8600ccd902c30801c6fe5ac806afa')
     main.run()
