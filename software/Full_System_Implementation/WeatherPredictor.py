@@ -216,20 +216,20 @@ def extract_features_from_frame(image_frame):
     gray_image = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY)
     hsv_image = cv2.cvtColor(image_frame, cv2.COLOR_BGR2HSV)
 
-    # 计算整体亮度
+    # calculate the brightness
     overall_brightness = np.mean(gray_image)
 
-    # 计算整体饱和度
+    # calculate the saturation
     overall_saturation = np.mean(hsv_image[:, :, 1])
 
-    # 计算整体对比度
+    # calculate the contrast
     overall_contrast = gray_image.std()
 
-    # 提取颜色直方图特征（例如，只使用R通道）
+    # extract hist feature
     hist = cv2.calcHist([image_frame], [0], None, [256], [0, 256])  # R通道
     r_hist_feature = hist.flatten()
 
-    # 将所有特征合并为一个特征向量
+    # combine all features in a combination
     features = np.hstack([overall_brightness, overall_saturation, overall_contrast, r_hist_feature])
     return features.reshape(1, -1)
 
@@ -282,7 +282,6 @@ def train_svm_classifier(features, labels):
     print("Accuracy:", accuracy_score(y_test, y_pred))
     return clf
 
-# 示例使用
 folder_path = "C:\image"
 features, labels = load_dataset(folder_path)
 svm_classifier = train_svm_classifier(features, labels)
