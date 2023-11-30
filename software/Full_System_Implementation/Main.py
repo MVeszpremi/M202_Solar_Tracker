@@ -2,6 +2,7 @@ from SunPositionDrawer import SunPositionDrawer
 from ArduinoSerialInterface import ArduinoSerialInterface
 from CloudSegmentation import CloudSegmentation
 from WeatherChecker import WeatherChecker
+from WeatherPredictor import WeatherPredictor
 import time
 import matplotlib.pyplot as plt
 import cv2
