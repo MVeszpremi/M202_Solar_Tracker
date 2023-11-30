@@ -24,9 +24,21 @@ class Main:
         self.cloud_segmentation.capture_image()
         self.cloud_segmentation.processForClouds()
         current_bad_weather = self.weather_checker.check_current_severe_weather()
-        if current_bad_weather:
+        ret, frame = self.weather_predictor.cap.read()
+        if ret:
+            # The camera detects if the current weather is sunny
+            current_sunny_weather_cam = self.weather_predictor.predict_weather(frame) == "Sunny"
+
+            # If the API and camera test results do not match, the camera results will prevail
+            current_sunny_weather = current_sunny_weather_cam if current_sunny_weather_api != current_sunny_weather_cam else current_sunny_weather_api
+        else:
+            # If it is not possible to read frames from the camera, use the API result
+            current_sunny_weather = current_sunny_weather_api
+
+        if not current_sunny_weather:
             self.arduino_interface.moveToAngle(-59.0, 0)
-            print("Severe weather is currently present.")
+            print("Non-sunny weather is currently present.")
+
         else:
             self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
             self.cloud_segmentation.setErrAngle(self.sun_drawer.getRotXErr(), self.sun_drawer.getRotYErr())
@@ -54,6 +66,7 @@ class Main:
 
 
 if __name__ == "__main__":
-    svm_classifier = 
+    svm_classifier_path = 'path/to/svm_classifier.joblib'  # update the path
+    svm_classifier = joblib.load(svm_classifier_path)
     main = Main(location_city='Los Angeles', api_weather = '32b8600ccd902c30801c6fe5ac806afa')
     main.run()
