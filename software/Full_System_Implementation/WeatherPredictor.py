@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
-
+import CloudSegmentation from CloudSegmentation
 import os
 import csv
 from sklearn import svm
@@ -294,17 +294,21 @@ def predict_weather(frame, classifier):
 
 
 class WeatherPredictor:
-    def __init__(self, svm_classifier):
-        self.cap = cv2.VideoCapture(0)  # Default webcam
+    def __init__(self, svm_classifier, cloud_segmentation):
         self.classifier = svm_classifier
+        self.cloud_segmentation = cloud_segmentation
 
     def extract_features_from_frame(self, image_frame):
         """Extract features from the given frame for weather prediction."""
         # [Include the implementation of feature extraction here]
         # Return the feature vector
 
-    def predict_weather(self, frame):
-        """Predict the weather for the given frame."""
+ def predict_weather(self):
+        frame = self.cloud_segmentation.get_current_image() 
+        if frame is None:
+            print("Failed to capture image")
+            return "Unable to predict"
+
         features = self.extract_features_from_frame(frame)
         prediction = self.classifier.predict(features)
         return 'Sunny' if prediction == 1 else 'Not Sunny'
@@ -312,16 +316,11 @@ class WeatherPredictor:
     def display_webcam_feed(self):
         """Display the webcam feed with weather prediction."""
         while True:
-            ret, frame = self.cap.read()
-            if not ret:
-                break
+            weather = self.predict_weather()
+            if weather != "Unable to predict":
+                print("Predicted Weather:", weather)
+                # 使用 CloudSegmentation 类中的图像显示
+                cv2.imshow('Webcam Frame', self.cloud_segmentation.sky_image)
 
-            weather = self.predict_weather(frame)
-            print("Predicted Weather:", weather)
-
-            cv2.imshow('Webcam Frame', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-
-        self.cap.release()
-        cv2.destroyAllWindows()
