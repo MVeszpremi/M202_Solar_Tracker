@@ -8,12 +8,13 @@ import matplotlib.pyplot as plt
 import cv2
 
 class Main:
-    def __init__(self, location_city, api_weather):
+    def __init__(self, location_city, api_weather, svm_classifier):
         plt.ion()  # Enable interactive mode
         self.sun_drawer = SunPositionDrawer()
         self.arduino_interface = ArduinoSerialInterface()
         self.cloud_segmentation = CloudSegmentation()
         self.weather_checker = WeatherChecker(api_weather, location_city)
+        self.weather_predictor = WeatherPredictor(svm_classifier)
 
 
 
@@ -53,5 +54,6 @@ class Main:
 
 
 if __name__ == "__main__":
+    svm_classifier = 
     main = Main(location_city='Los Angeles', api_weather = '32b8600ccd902c30801c6fe5ac806afa')
     main.run()
