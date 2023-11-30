@@ -96,6 +96,7 @@ class SaturationAnalyzer:
         return variation
 
     def visualize_saturation_distribution(self):
+        """Visualize the saturation distribution"""
         # plt.figure()
         # plt.imshow(self.hsv_image[:, :, 1], cmap='gray')
         # plt.colorbar()
@@ -141,6 +142,7 @@ class ContrastAnalyzer:
         return variation
 
     def visualize_contrast_distribution(self):
+        """Visual Contrast Distribution"""
         # plt.figure()
         # plt.imshow(self.gray_image, cmap='gray')
         # plt.colorbar()
@@ -214,20 +216,20 @@ def extract_features_from_frame(image_frame):
     gray_image = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY)
     hsv_image = cv2.cvtColor(image_frame, cv2.COLOR_BGR2HSV)
 
-    # Calculating Overall Brightness
+    # 计算整体亮度
     overall_brightness = np.mean(gray_image)
 
-    # Calculate overall saturation
+    # 计算整体饱和度
     overall_saturation = np.mean(hsv_image[:, :, 1])
 
-    # Calculating Overall Contrast
+    # 计算整体对比度
     overall_contrast = gray_image.std()
 
-    # Extract color histogram features (e.g., using only the R channel)
+    # 提取颜色直方图特征（例如，只使用R通道）
     hist = cv2.calcHist([image_frame], [0], None, [256], [0, 256])  # R通道
     r_hist_feature = hist.flatten()
 
-    # Combine all features into one feature vector
+    # 将所有特征合并为一个特征向量
     features = np.hstack([overall_brightness, overall_saturation, overall_contrast, r_hist_feature])
     return features.reshape(1, -1)
 
@@ -259,7 +261,7 @@ def load_dataset(folder_path):
     all_features = []
     labels = []
     for image_name in os.listdir(folder_path):
-        if image_name.endswith('.jpg'):  # Assuming all images are in jpg format
+        if image_name.endswith('.jpg'):
             image_path = os.path.join(folder_path, image_name)
             img_features = extract_features(image_path)
             all_features.append(img_features[0])  # Adding feature vectors
@@ -280,7 +282,7 @@ def train_svm_classifier(features, labels):
     print("Accuracy:", accuracy_score(y_test, y_pred))
     return clf
 
-# Sample Use
+# 示例使用
 folder_path = "C:\image"
 features, labels = load_dataset(folder_path)
 svm_classifier = train_svm_classifier(features, labels)
@@ -291,26 +293,36 @@ def predict_weather(frame, classifier):
     prediction = classifier.predict(features)
     return 'Sunny' if prediction == 1 else 'Not Sunny'
 
-# Initialize the webcam
-cap = cv2.VideoCapture(0)  # Default webcam
 
-while True:
-    # Read a frame from the webcam
-    ret, frame = cap.read()
-    if not ret:
-        break
+class WeatherPredictor:
+    def __init__(self, svm_classifier):
+        self.cap = cv2.VideoCapture(0)  # Default webcam
+        self.classifier = svm_classifier
 
-    # Predict the weather for the current frame
-    weather = predict_weather(frame, svm_classifier)
-    print("Predicted Weather:", weather)
+    def extract_features_from_frame(self, image_frame):
+        """Extract features from the given frame for weather prediction."""
+        # [Include the implementation of feature extraction here]
+        # Return the feature vector
 
-    # Display the webcam frame
-    cv2.imshow('Webcam Frame', frame)
+    def predict_weather(self, frame):
+        """Predict the weather for the given frame."""
+        features = self.extract_features_from_frame(frame)
+        prediction = self.classifier.predict(features)
+        return 'Sunny' if prediction == 1 else 'Not Sunny'
 
-    # Exit loop when 'q' key is pressed
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    def display_webcam_feed(self):
+        """Display the webcam feed with weather prediction."""
+        while True:
+            ret, frame = self.cap.read()
+            if not ret:
+                break
 
-# Release the webcam resource and close all windows
-cap.release()
-cv2.destroyAllWindows()
+            weather = self.predict_weather(frame)
+            print("Predicted Weather:", weather)
+
+            cv2.imshow('Webcam Frame', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        self.cap.release()
+        cv2.destroyAllWindows()
