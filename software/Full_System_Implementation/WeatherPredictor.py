@@ -282,12 +282,12 @@ def train_svm_classifier(features, labels):
     print("Accuracy:", accuracy_score(y_test, y_pred))
     return clf
 
-# Sample Use
-folder_path = "./image"
-features, labels = load_dataset(folder_path)
-svm_classifier = train_svm_classifier(features, labels)
+# # Sample Use
+# folder_path = "../../data/image"
+# features, labels = load_dataset(folder_path)
+# svm_classifier = train_svm_classifier(features, labels)
 
-svm_classifier = joblib.load('./svm_classifier.joblib')
+# svm_classifier = joblib.load('./svm_classifier.joblib')
 
 def predict_weather(frame, classifier):
     """Weather prediction for a given image frame"""
