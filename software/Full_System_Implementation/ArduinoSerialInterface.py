@@ -62,7 +62,7 @@ class ArduinoSerialInterface:
         R1 = 5400.0  # R1 in Ohms
         R2 = 1200.0  # R2 in Ohms
         Vin = voltage * (R1 + R2) / R2  # Calculate Vin
-        R_panel = 3.0  # Replace with the actual resistance of your solar panel if known
+        R_panel = 500.0  # Replace with the actual resistance of your solar panel if known
 
         # Calculate Power (replace this formula if you have the current value)
         power = Vin**2 / R_panel if R_panel else 0  # Power calculation
