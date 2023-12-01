@@ -35,7 +35,13 @@ class CloudSegmentation ():
             self.sky_image = scaled_frame  # Store the scaled image in the variable
         else:
             print("Failed to capture image")
-
+            
+    def get_captured_image(self):
+        """Returns the most recently captured image and its status"""
+        if self.capture_image():
+            return True, self.sky_image
+        else:
+            return False, None
     def processForClouds(self):
         if self.sky_image is not None:
             mask = self.create_cloud_mask(self.sky_image)
