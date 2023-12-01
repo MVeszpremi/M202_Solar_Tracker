@@ -150,8 +150,32 @@ Once the sun's position is pinpointed, we compare the cloud centroids to assess 
 **On Device Processing**
 
 
+**Cloud Data**
 
-Cloud Data
+For the creation of an advanced weather monitoring system, we initially utilized a semantic segmentation technique using YOLOv8 to record and analyze cloud imagery. The YOLOv8 model, renowned for its advanced deep learning architecture, has exhibited remarkable proficiency in various image identification fields. Nevertheless, while implementing it in real-world scenarios, we faced substantial obstacles in terms of performance and efficiency of recognition. Deep learning models, although highly capable, can require significant computer resources. This requirement resulted in a significant reduction in processing speed and a decline in overall system efficiency.
+
+In light of these technical obstacles, our team decided to pursue a different strategy, shifting towards a technique based on OpenCV for the purpose of identifying and analyzing clouds. The main reason for this strategic change was the inherent efficiency and lightweight nature of OpenCV's image processing capabilities. Unlike deep learning approaches, OpenCV provides faster processing speed while requiring fewer computational resources. Our system has the capability to process photos in real-time while maintaining a high level of accuracy, which is a significant advantage.
+
+
+
+To address these requirements, we carefully devised and executed the CloudSegmentation class. The purpose of this class is crucial in our weather monitoring system, specifically in gathering and analyzing cloud photos using a camera. The capture_image method efficiently retrieves real-time photos from the camera. Subsequently, the class enhances the processing efficiency of these photos by reducing their dimensions and subsequently saves them for further study.
+
+
+
+The CloudSegmentation class utilizes the create_cloud_mask function specifically for the purpose of cloud detection and analysis. This technique converts the collected pictures into grayscale and using a binary threshold to differentiate clouds from the sky. In order to improve the accuracy of the produced mask, the method also includes morphological processes.
+
+
+
+In addition, the processForClouds function of the class enhances the analysis by manipulating the collected photos to generate cloud masks and outlining hexagons around the clouds. This procedure is essential for precisely determining and examining the positions of clouds. The find_closest method of the class calculates the closest point to a specified angular error, which is a crucial operation for accurately determining the precise location of clouds.
+
+
+
+The draw_hexagon_around_clouds function of the CloudSegmentation class visually represents the form and position of clouds by creating polygons around identified clouds. This capability is essential for monitoring and evaluating the movements and alterations of clouds.
+
+
+
+To summarize, the CloudSegmentation class includes a release method for releasing camera resources and a setErrAngle method for changing the acquired picture angles depending on angular faults. The CloudSegmentation class is a crucial part of our weather monitoring system, providing strong support for cloud identification and analysis with its efficient and effective image processing algorithms.
+
 
 **Weather Dectection**
 
