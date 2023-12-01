@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
-import CloudSegmentation from CloudSegmentation
+import joblib
 import os
 import csv
 from sklearn import svm
@@ -216,20 +216,20 @@ def extract_features_from_frame(image_frame):
     gray_image = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY)
     hsv_image = cv2.cvtColor(image_frame, cv2.COLOR_BGR2HSV)
 
-    # calculate the brightness
+    # Calculating Overall Brightness
     overall_brightness = np.mean(gray_image)
 
-    # calculate the saturation
+    # Calculate overall saturation
     overall_saturation = np.mean(hsv_image[:, :, 1])
 
-    # calculate the contrast
+    # Calculating Overall Contrast
     overall_contrast = gray_image.std()
 
-    # extract hist feature
+    # Extract color histogram features (e.g., using only the R channel)
     hist = cv2.calcHist([image_frame], [0], None, [256], [0, 256])  # R通道
     r_hist_feature = hist.flatten()
 
-    # combine all features in a combination
+    # Combine all features into one feature vector
     features = np.hstack([overall_brightness, overall_saturation, overall_contrast, r_hist_feature])
     return features.reshape(1, -1)
 
@@ -248,7 +248,7 @@ def extract_features(image_path):
     overall_contrast = contrast_analyzer.calculate_overall_contrast()
     color_histogram_analyzer = ColorHistogramAnalyzer(image_path)
     rgb_hists = color_histogram_analyzer.analyze_rgb_histogram()
-    r_hist_feature = rgb_hists[0].flatten()  # 只使用R通道的直方图数据
+    r_hist_feature = rgb_hists[0].flatten()
 
     # Checking for NaN values and handling them
     features = [overall_brightness, overall_saturation, overall_contrast] + list(r_hist_feature)
@@ -282,45 +282,15 @@ def train_svm_classifier(features, labels):
     print("Accuracy:", accuracy_score(y_test, y_pred))
     return clf
 
+# Sample Use
 folder_path = "C:\image"
 features, labels = load_dataset(folder_path)
 svm_classifier = train_svm_classifier(features, labels)
+
+svm_classifier = joblib.load('./svm_classifier.joblib')
 
 def predict_weather(frame, classifier):
     """Weather prediction for a given image frame"""
     features = extract_features_from_frame(frame)
     prediction = classifier.predict(features)
     return 'Sunny' if prediction == 1 else 'Not Sunny'
-
-
-class WeatherPredictor:
-    def __init__(self, svm_classifier, cloud_segmentation):
-        self.classifier = svm_classifier
-        self.cloud_segmentation = cloud_segmentation
-
-    def extract_features_from_frame(self, image_frame):
-        """Extract features from the given frame for weather prediction."""
-        # [Include the implementation of feature extraction here]
-        # Return the feature vector
-
- def predict_weather(self):
-        frame = self.cloud_segmentation.get_current_image() 
-        if frame is None:
-            print("Failed to capture image")
-            return "Unable to predict"
-
-        features = self.extract_features_from_frame(frame)
-        prediction = self.classifier.predict(features)
-        return 'Sunny' if prediction == 1 else 'Not Sunny'
-
-    def display_webcam_feed(self):
-        """Display the webcam feed with weather prediction."""
-        while True:
-            weather = self.predict_weather()
-            if weather != "Unable to predict":
-                print("Predicted Weather:", weather)
-                # 使用 CloudSegmentation 类中的图像显示
-                cv2.imshow('Webcam Frame', self.cloud_segmentation.sky_image)
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
