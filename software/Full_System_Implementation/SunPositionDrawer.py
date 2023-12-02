@@ -159,6 +159,15 @@ class SunPositionDrawer ():
         self.rot_x_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[1]
         self.rot_y_err = self.calculate_pitch_yaw_error(rectangle, sun_x, sun_y, sun_z)[0]
 
+        if(self.rot_x > -59 and self.rot_x < 24):
+            self.rot_x_err = 0
+
+        if(self.rot_y > -24 and self.rot_y < 24):
+            self.rot_y_err = 0
+
+
+
+
         return rectangle
     
     def calculate_pitch_yaw_error(self, rectangle, x, y, z):

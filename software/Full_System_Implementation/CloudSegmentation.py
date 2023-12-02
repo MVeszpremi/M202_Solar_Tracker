@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import numpy as np
 from pvlib import solarposition, tracking
-import datetime
+from datetime import datetime
 import math
 import pandas as pd
 from shapely.geometry import Point, Polygon
@@ -48,7 +48,7 @@ class CloudSegmentation ():
             if mask is not None:
                 img = self.draw_hexagon_around_clouds(self.sky_image, mask)
                 
-                y, x = self.find_closest(self.ang_x_err, self.ang_y_err)
+                y, x = self.find_closest(-1*self.ang_x_err, -1*self.ang_y_err)
 
                 color = (0, 255, 255)  # Yellow in BGR format
                 radius = 5  # Radius of 5 to create a dot of size 10
@@ -58,6 +58,12 @@ class CloudSegmentation ():
                 # Show the image if img is not None
                 if img is not None:
                     cv2.imshow('Mask', img)
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"{timestamp}.png"
+
+                    # Save the image
+                    file_path = os.path.join("../../data/captured_sky", filename)
+                    cv2.imwrite(file_path, img)
                 else:
                     print("Failed to draw hexagon around clouds.")
             else:
