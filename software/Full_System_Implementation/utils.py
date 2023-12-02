@@ -285,7 +285,7 @@ def train_svm_classifier(features, labels):
     return clf
 
 # Sample Use
-folder_path = "./image"
+folder_path = "../../data/image"
 features, labels = load_dataset(folder_path)
 svm_classifier = train_svm_classifier(features, labels)
 

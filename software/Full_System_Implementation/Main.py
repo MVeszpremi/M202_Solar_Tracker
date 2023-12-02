@@ -8,12 +8,13 @@ import joblib
 import matplotlib.pyplot as plt
 import cv2
 
+doNotRotate = False
 
 class Main:
     def __init__(self, location_city, api_weather, svm_classifier):
         plt.ion()  # Enable interactive mode
         self.sun_drawer = SunPositionDrawer()
-        self.arduino_interface = ArduinoSerialInterfaceTesting()  # ArduinoSerialInterface()
+        self.arduino_interface = ArduinoSerialInterface() #ArduinoSerialInterfaceTesting() 
         self.cloud_segmentation = CloudSegmentation()
         self.weather_checker = WeatherChecker(api_weather, location_city)
         self.svm_classifier = joblib.load(svm_classifier_path)
@@ -44,8 +45,9 @@ class Main:
             self.arduino_interface.moveToAngle(-59.0, 0)
             print("Non-sunny or bad weather detected, adjusting solar panel.")
         else:
-            self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
-            self.cloud_segmentation.setErrAngle(self.sun_drawer.getRotXErr(), self.sun_drawer.getRotYErr())
+            if(doNotRotate == False):
+                self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
+                self.cloud_segmentation.setErrAngle(self.sun_drawer.getRotXErr(), self.sun_drawer.getRotYErr())
 
     def periodic_task_2_second(self):
         print(f"CLAMPED: yaw (x):{self.sun_drawer.getRotX()}, pitch(y):{self.sun_drawer.getRotY()}")
