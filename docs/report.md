@@ -193,7 +193,21 @@ In conclusion, the combination of the fisheye camera and advanced machine learni
 
 # 4. Evaluation and Results
 
-Power Data Collection
+System Solar Tracking Timelapse:
+
+https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/e725a0c8-c1f7-4c2e-83fb-e54552dda78a
+
+From the camera perspective:
+
+https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/75688c7c-75bd-4c7a-a383-a41ac750f8b1
+
+Power Logging Result:
+<img width="637" alt="good3 copy" src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/33bf4def-958d-46ba-be76-967d1cb4b9af">
+
+Not Tracking Sun:
+
+Tracking Sun:
+<img width="640" alt="good copy" src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/d88e358d-fac4-4a06-a941-495895fe19b1">
 
 
 # 5. Discussion and Conclusions
