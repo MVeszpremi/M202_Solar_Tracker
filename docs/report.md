@@ -195,11 +195,17 @@ In conclusion, the combination of the fisheye camera and advanced machine learni
 
 System Solar Tracking Timelapse:
 
-https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/e725a0c8-c1f7-4c2e-83fb-e54552dda78a
+<video width="320" height="240" controls>
+  <source src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/e725a0c8-c1f7-4c2e-83fb-e54552dda78a" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 From the camera perspective:
 
-https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/75688c7c-75bd-4c7a-a383-a41ac750f8b1
+<video width="320" height="240" controls>
+  <source src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/75688c7c-75bd-4c7a-a383-a41ac750f8b1" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 Power Logging Result:
 <img width="637" alt="good3 copy" src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/33bf4def-958d-46ba-be76-967d1cb4b9af">
