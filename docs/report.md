@@ -192,25 +192,14 @@ The WeatherPredictor class, which incorporates this sophisticated classifier, ex
 In conclusion, the combination of the fisheye camera and advanced machine learning techniques in this weather forecast system highlights a seamless integration of hardware capabilities and software expertise. The system's ability to provide precise weather forecasts, based on a diverse and extensive dataset, demonstrates the significant impact of machine learning in real-world situations, especially in environmental analysis and meteorological research. Moreover, by utilizing the camera as the main method of verification, the prediction outputs are made more reliable and precise, taking into account the potential flaws of weather forecasts.
 
 **Implementation Procedure**
-The flowchart outlines an autonomous operational protocol for real-time solar tracking and weather response. This protocol has been materialized through the development and implementation of various subsystems:
 
+In the proposed methodology, we elaborate on an autonomous operational protocol, which is conceptualized through a sequential flowchart designed for real-time environmental monitoring and actuation based on solar positioning and weather conditions. The implementation of each segment of the flowchart is as follows:
 
+![alt text](https://github.com/MVeszpremi/M202_Solar_Tracker/blob/main/docs/media/flowchart.png)
 
-Idle State and Time Reporting: The system initializes in an idle state, consistently logging the temporal data. The time reporting function has been previously established to provide an accurate system timestamp, essential for synchronizing subsequent operations.
+_Figure 3.1 Flowchart Diagram_
 
-Sun Presence Verification: The system determines whether the sun is present in the sky, discounting dawn and dusk periods. This step employs a previously developed algorithm that processes real-time celestial data to calculate the sun's position with respect to the observer's geographical location.
-
-Sun Position Calculation Process: Upon confirming daylight, the system computes the sun's position at regular intervals. The implementation of this process utilizes astronomical models that factor in the Earth's rotation and tilt to calculate the sun's azimuth and elevation throughout the day.
-
-Continuous Cloud Detection: The system employs a cloud detection mechanism that operates continuously. This mechanism is based on a combination of sensors that measure solar irradiance and visual imaging to identify the density and coverage of clouds.
-
-Adverse Weather Determination: In the event of potential adverse weather conditions, the system assesses whether to alter its operational stance. This determination is made by analyzing the sensor data trends over a set time interval to recognize significant deviations indicative of weather changes.
-
-Cloud Obstruction Decision: Should the continuous cloud detection suggest significant cloud coverage, the system decides whether these clouds obstruct the sun. This decision-making process is informed by a threshold-based analysis, where sensor readings below a certain irradiance level trigger a cloud obstruction event.
-
-Motor Angle Adjustment: If the cloud cover is deemed not to obstruct the sun, the system calculates the motor angle for rotation. The motor control algorithm, previously validated in field tests, adjusts the angle of the solar panel or any connected device to align optimally with the sun's position for maximum energy capture.
-
-Each component of this methodology has been previously implemented and rigorously tested to ensure reliable operation. The integration of these components into a cohesive system allows for autonomous adjustments based on real-time environmental data, demonstrating the system's adaptive capabilities in various weather conditions.
+The methodology encapsulates a self-sufficient system that integrates environmental sensing, data processing, and mechanical actuation to optimize solar energy harvesting. Each segment's implementation is a testament to the system's robustness and reflects a harmonious interplay between software algorithms and hardware components.
 
 # 4. Evaluation and Results
 
