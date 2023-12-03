@@ -193,7 +193,7 @@ In conclusion, the combination of the fisheye camera and advanced machine learni
 
 **Implementation Procedure**
 
-In the proposed methodology, we elaborate on an autonomous operational protocol, which is conceptualized through a sequential flowchart designed for real-time environmental monitoring and actuation based on solar positioning and weather conditions. The implementation of each segment of the flowchart is as follows:
+In the proposed methodology, we elaborate on an autonomous operational protocol, which is conceptualized through a sequential flowchart designed for real-time environmental monitoring and actuation based on solar positioning and weather conditions. The implementation of the flowchart is as follows:
 
 ![alt text](https://github.com/MVeszpremi/M202_Solar_Tracker/blob/main/docs/media/flowchart.png)
 
