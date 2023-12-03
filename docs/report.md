@@ -207,13 +207,11 @@ From the camera perspective:
   Your browser does not support the video tag.
 </video>
 
-Power Logging Result:
-<img width="637" alt="good3 copy" src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/33bf4def-958d-46ba-be76-967d1cb4b9af">
+Power Comparison:
 
-Not Tracking Sun:
+We noticed about a 6% increase in power when we were tracking the position of the sun.
 
-Tracking Sun:
-<img width="640" alt="good copy" src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/d88e358d-fac4-4a06-a941-495895fe19b1">
+![tracking_processeed](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/109947f1-69ac-4870-b4d3-ac40fd031277)
 
 
 # 5. Discussion and Conclusions
