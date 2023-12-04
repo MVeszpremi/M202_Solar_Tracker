@@ -250,7 +250,11 @@ For a conservative scenario, we estimated 5% of panels damaged, costing $286k to
 
 For the more extreme case study with 80% panel damage, costs escalated dramatically to $4.58 million for parts, $270k labor, $299k lost electricity sales, and $630k customer inconvenience over 3 days. Total costs hit $5.78 million. 
 
-While both scenarios have major cost implications, the case study illustrates how exponentially higher the expenses can grow if catastrophic damage occurs. Thus, our "Protective Mode" feature on our panel is proven to be quite valuable in the long run. 
+While both scenarios have major cost implications, the case study illustrates how exponentially higher the expenses can grow if catastrophic damage occurs. Thus, our "Protection Mode" feature on our panel is proven to be quite valuable in the long run. 
+
+Figure # below depicts the potential costs incurred on a typical solar panel farm due to severe weather conditions:
+
+![Cost Analysis of Solar Farms without _Protection Mode_](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/149114738/b640ddda-d3db-4ebc-b3e4-3b181d9f7934)
 
 System Solar Tracking Timelapse:
 
