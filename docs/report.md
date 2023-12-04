@@ -30,8 +30,6 @@ The significance of this project extends beyond immediate efficiency gains; it h
 
 However, the project does present challenges. Determining the most effective angle from the camera images, accurately assessing cloud thickness, and identifying cloud cover are complex tasks that we are striving to solve.
 
-
-
 This section should cover the following items:
 
 * Motivation & Objective: What are you trying to do and why? (plain English without jargon)
@@ -43,6 +41,35 @@ This section should cover the following items:
 * Metrics of Success: What are metrics by which you would check for success?
 
 # 2. Related Work
+## 2.a. Papers
+
+What is Solar Tracking?
+This paper provides a foundational base for beginning to understand solar tracking and the existing technologies. It gives a high level overview of GPS and liquid boiling systems currently in industry. This gave us an initial launch point for application, implementation, and optimization.
+
+Various Solar Tracking Technologies
+This paper describes how solar panels capture and distribute energy and how they currently utilize single and dual axis tracking systems. It also defines passive and active solar trackers and discusses the advantages of solar tracking and the bright future it entails. With this infomration, we were able to further detail our design and determine the use of an active, dual-axis tracker.
+
+Sky-Image-Based Solar Forecasting Using Deep Learning
+This study investigates different training strategies for solar forecasting models using ground-based sky images from various global datasets with diverse climate patterns. It compares the performance of local models trained individually on single datasets, global models trained on a fusion of multiple datasets, and knowledge transfer from pre-trained models to new datasets. The results show that local models work well in their respective locations with slight errors and provide a robust template for our project.
+
+Active Solar-Tracking Systems for Photovoltaic Technology & Implementation
+This journal discusses the significance of solar irradiation for photovoltaic (PV) systems and the benefits of solar tracking in maximizing energy generation. It highlights the limitations of current active sensor-tracking algorithms, including issues with cloudy weather, module positioning after nightfall, and protection from adverse weather conditions. It also suggests incorporating periodic movement and nearly horizontal positioning, offering improved system lifetime and storm damage prevention while maintaining high tracking accuracy which influenced our project design decisions.
+
+TrueCapture’s New Split Boost Mode
+This article gave us insight into the state-of-the-art in the solar industry. It describes the latest addition to TrueCapture Software known as the "Split Boost", a row-to-row feature designed to maximize energy gain for photovaltaic plants using split-cell solar modules. This innovation leverages the shade-tolerant nature of split-cell modules, adjusting the tracker rows to optimize irradiance on the top half of the modules, resulting in a boost in production, even on flat terrain, with preliminary data showing up to a 1% yield improvement compared to conventional backtracking for specific conditions.
+
+Solar Tracking Investment Review
+After learning about the technology, we were interested in the financial considerations of actually implementing that technology. This article provides an in depth investment review at the residential and commerical level. Although this project is not heavily concerned with finanical implications, as engineers and entrepreneurs, we wanted to take the time to understand all aspects of our project.
+
+## 2.b. Datasets
+
+Singapore Whole sky IMaging SEGmentation Database
+Singapore Whole sky IMaging CATegories Database
+
+## 2.c. Software
+
+Pvlib is used as the Solar Positioning Algorithm (SPA) library
+OpenCV is used for general image processing and cloud segmentation
 
 # 3. Technical Approach
 
