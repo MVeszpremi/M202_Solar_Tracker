@@ -238,6 +238,20 @@ The methodology encapsulates a self-sufficient system that integrates environmen
 
 # 4. Evaluation and Results
 
+**Financial Projections**
+
+Our team analyzed past severe weather events to model possible damage scenarios for solar farms. We made cost and destruction projections based on a moderate 5% panel loss scenario, then compared it to a case mimicking the recent level of damage at a Nebraska farm. In June 2023, a violent hailstorm ruined nearly 80% of their unprotected panel system in minutes. With climate change, more violent weather and potential damage is likely. Storms with baseball-sized hail are happening more often now and can shatter glass panels that are not equipped with our "Protection Mode" feature.
+
+Replacing shattered panels and lost sales are major hits. The are also indirect costs from losing electricity sales, customers finding power elsewhere, and payment for repair crews. Weather disasters on this level seem rare but are becoming more common globally. Even one happening over decades of operation can cripple finances. The following analysis depicts risks that used to seem improbable becoming commonplace now.
+
+Our team conducted an analysis of potential cost impacts to a 5.2 MW solar farm under different damage scenarios. We looked at baseline costs of $5.72 million to build the 5.2 MW farm, comprised of 13,000 400W solar panels. We assumed electricity sells at the national average of $0.16 per kW. 
+
+For a conservative scenario, we estimated 5% of panels damaged, costing $286k to replace mechanisms plus $17k in labor. With 260 kWh generation capacity lost over 3 repair days and valuing customer inconvenience at $360k, total costs reached $681k on top of the original investment. 
+
+For the more extreme case study with 80% panel damage, costs escalated dramatically to $4.58 million for parts, $270k labor, $299k lost electricity sales, and $630k customer inconvenience over 3 days. Total costs hit $5.78 million. 
+
+While both scenarios have major cost implications, the case study illustrates how exponentially higher the expenses can grow if catastrophic damage occurs. Thus, our "Protective Mode" feature on our panel is proven to be quite valuable in the long run. 
+
 System Solar Tracking Timelapse:
 
 <video width="320" height="240" controls>
