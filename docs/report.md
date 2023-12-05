@@ -214,7 +214,7 @@ To summarize, the CloudSegmentation class includes a release method for releasin
 
 **Weather Dectection**
 
-The genesis of this project was the conceptualization of a mechanism to position solar panels vertically during unexpected hailstorms and other extreme weather events. This would help mitigate potential financial losses caused by significant property damage. This program goes beyond just protecting assets and demonstrates a wider commitment to innovation.
+The aim of this project was the conceptualization of a mechanism to position solar panels vertically during unexpected hailstorms and other extreme weather events. This would help mitigate potential financial losses caused by significant property damage. This program goes beyond just protecting assets and demonstrates a wider commitment to innovation.
 
 To achieve this goal, we utilized the OpenWeatherMap API to gather weather data, specifically targeting the identification of circumstances that align with established severe weather parameters. To address the inherent limitations in the accuracy of weather forecasts, a camera system was added to provide an extra layer of verification. Importantly, the camera used was not a typical one, but rather a fisheye version known for its wide field of view, which allowed for thorough sky imaging.
 
