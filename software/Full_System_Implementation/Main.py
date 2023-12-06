@@ -39,11 +39,12 @@ class Main:
             camera_sunny_weather = weather == "Sunny"
         else:
             camera_sunny_weather = True  # Default to sunny if camera fails
-
         # Decide the action based on API and camera weather data
         if api_bad_weather and not camera_sunny_weather:
             self.arduino_interface.moveToAngle(-59.0, 0)
             print("Non-sunny or bad weather detected, adjusting solar panel.")
+        elif not camera_sunny_weather:
+            self.arduino_interface.moveToAngle(0.0, 0.0)
         else:
             if(doNotRotate == False):
                 self.arduino_interface.moveToAngle(self.sun_drawer.getRotX(), self.sun_drawer.getRotY())
