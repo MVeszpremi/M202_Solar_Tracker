@@ -229,13 +229,12 @@ $$
 Subsequently, we pinpoint the sun's position on the camera image. This is achieved by referring to the degree matrix generated during camera calibration (see Appendix 1.1 Camera Calibration). We iteratively search this matrix to find the closest yaw and pitch angles. The corresponding matrix entry (i,j) is then used to accurately locate the sun within the camera's field of view.
 
 Once the sun's position is pinpointed, we compare the cloud centroids to assess cloud cover. This analysis is conducted using various methods, which are outlined as follows:
-1.
-2.
-3.
-...
 
+1. Cloud detection using a fisheye camera;
 
-**On Device Processing**
+2. Weather detection using SVM algorithm to identify features such as brightness, saturation, contrast and color histogram of captured images;
+
+3. Weather API embedded in the system.
 
 
 **Cloud Data**
@@ -246,23 +245,23 @@ In light of these technical obstacles, our team decided to pursue a different st
 
 
 
-To address these requirements, we carefully devised and executed the CloudSegmentation class. The purpose of this class is crucial in our weather monitoring system, specifically in gathering and analyzing cloud photos using a camera. The capture_image method efficiently retrieves real-time photos from the camera. Subsequently, the class enhances the processing efficiency of these photos by reducing their dimensions and subsequently saves them for further study.
+To address these requirements, we carefully devised and executed the **CloudSegmentation** class. The purpose of this class is crucial in our weather monitoring system, specifically in gathering and analyzing cloud photos using a camera. The **capture_image** method efficiently retrieves real-time photos from the camera. Subsequently, the class enhances the processing efficiency of these photos by reducing their dimensions and subsequently saves them for further study.
 
 
 
-The CloudSegmentation class utilizes the create_cloud_mask function specifically for the purpose of cloud detection and analysis. This technique converts the collected pictures into grayscale and using a binary threshold to differentiate clouds from the sky. In order to improve the accuracy of the produced mask, the method also includes morphological processes.
+The **CloudSegmentation** class utilizes the **create_cloud_mask** function specifically for the purpose of cloud detection and analysis. This technique converts the collected pictures into grayscale and using a binary threshold to differentiate clouds from the sky. In order to improve the accuracy of the produced mask, the method also includes morphological processes.
 
 
 
-In addition, the processForClouds function of the class enhances the analysis by manipulating the collected photos to generate cloud masks and outlining hexagons around the clouds. This procedure is essential for precisely determining and examining the positions of clouds. The find_closest method of the class calculates the closest point to a specified angular error, which is a crucial operation for accurately determining the precise location of clouds.
+In addition, the **processForClouds** function of the class enhances the analysis by manipulating the collected photos to generate cloud masks and outlining hexagons around the clouds. This procedure is essential for precisely determining and examining the positions of clouds. The find_closest method of the class calculates the closest point to a specified angular error, which is a crucial operation for accurately determining the precise location of clouds.
 
 
 
-The draw_hexagon_around_clouds function of the CloudSegmentation class visually represents the form and position of clouds by creating polygons around identified clouds. This capability is essential for monitoring and evaluating the movements and alterations of clouds.
+The **draw_hexagon_around_clouds** function of the CloudSegmentation class visually represents the form and position of clouds by creating polygons around identified clouds. This capability is essential for monitoring and evaluating the movements and alterations of clouds.
 
 
 
-To summarize, the CloudSegmentation class includes a release method for releasing camera resources and a setErrAngle method for changing the acquired picture angles depending on angular faults. The CloudSegmentation class is a crucial part of our weather monitoring system, providing strong support for cloud identification and analysis with its efficient and effective image processing algorithms.
+To summarize, the CloudSegmentation class includes a release method for releasing camera resources and a setErrAngle method for changing the acquired picture angles depending on angular faults. The CloudSegmentation class is a crucial part of our weather monitoring system, providing strong support for cloud identification and analysis with its efficient and effective image processing algorithms. These are some of the final results：
 
 
 **Weather Dectection**
@@ -271,11 +270,11 @@ The aim of this project was the conceptualization of a mechanism to position sol
 
 To achieve this goal, we utilized the OpenWeatherMap API to gather weather data, specifically targeting the identification of circumstances that align with established severe weather parameters. To address the inherent limitations in the accuracy of weather forecasts, a camera system was added to provide an extra layer of verification. Importantly, the camera used was not a typical one, but rather a fisheye version known for its wide field of view, which allowed for thorough sky imaging.
 
-The utilization of a fisheye camera played a crucial role in obtaining a wide-ranging and comprehensive dataset that was essential for training and validating the SVM classifier. A total of around 400 photos were collected, creating a strong basis for the system's prediction precision. The camera's wide field of view was crucial, as it captured large portions of the sky, enabling a comprehensive investigation of different meteorological components. The thorough analysis of the sky's image was crucial for the identification of its characteristics, including brightness, saturation, contrast, and color histograms. This ensured a realistic representation of the vast and varied sky.
+The utilization of a fisheye camera played a crucial role in obtaining a wide-ranging and comprehensive dataset that was essential for training and validating the SVM classifier. A total of around 50 photos were collected, creating a strong basis for the system's prediction precision. The camera's wide field of view was crucial, as it captured large portions of the sky, enabling a comprehensive investigation of different meteorological components. The thorough analysis of the sky's image was crucial for the identification of its characteristics, including brightness, saturation, contrast, and color histograms. This ensured a realistic representation of the vast and varied sky.
 
-The subsequent picture processing entailed utilizing a sequence of advanced analyzers, such as BrightnessAnalyzer, SaturationAnalyzer, ContrastAnalyzer, and ColorHistogramAnalyzer. Each of these analyzers had a vital function in extracting precise image properties, which were then inputted into the SVM classifier. The comprehensive method of combining features greatly improved the classifier's capacity to accurately distinguish between sunny and non-sunny circumstances.
+The subsequent picture processing entailed utilizing a sequence of advanced analyzers, such as **BrightnessAnalyzer**, **SaturationAnalyzer**, **ContrastAnalyzer**, and **ColorHistogramAnalyzer**. Each of these analyzers had a vital function in extracting precise image properties, which were then inputted into the SVM classifier. The comprehensive method of combining features greatly improved the classifier's capacity to accurately distinguish between sunny and non-sunny circumstances.
 
-The WeatherPredictor class, which incorporates this sophisticated classifier, exhibited exceptional effectiveness in predicting real-time weather. The device's capacity to understand and analyze images captured by the fisheye camera and provide instant weather forecasts enhances its usefulness in meteorology, environmental monitoring, and integration with smart home systems. Here is the final detection results for both cloudy and sunny day:
+The **WeatherPredictor** class, which incorporates this sophisticated classifier, exhibited exceptional effectiveness in predicting real-time weather. The device's capacity to understand and analyze images captured by the fisheye camera and provide instant weather forecasts enhances its great usefulness in not only our project, but meteorology, environmental monitoring, and integration with smart home systems. Here is the final detection results for both cloudy and sunny day:
 
 In conclusion, the combination of the fisheye camera and advanced machine learning techniques in this weather forecast system highlights a seamless integration of hardware capabilities and software expertise. The system's ability to provide precise weather forecasts, based on a diverse and extensive dataset, demonstrates the significant impact of machine learning in real-world situations, especially in environmental analysis and meteorological research. Moreover, by utilizing the camera as the main method of verification, the prediction outputs are made more reliable and precise, taking into account the potential flaws of weather forecasts.
 
