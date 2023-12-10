@@ -262,6 +262,10 @@ The **draw_hexagon_around_clouds** function of the CloudSegmentation class visua
 
 
 To summarize, the CloudSegmentation class includes a release method for releasing camera resources and a setErrAngle method for changing the acquired picture angles depending on angular faults. The CloudSegmentation class is a crucial part of our weather monitoring system, providing strong support for cloud identification and analysis with its efficient and effective image processing algorithms. These are some of the final results：
+<p align="center">
+  <img src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/131337093/1759d65d-05e3-453e-85e5-74732b20e6d1" width="75%" />
+</p>
+_Figure 3.1 Cloud_Detection_Result_
 
 
 **Weather Dectection**
@@ -275,6 +279,11 @@ The utilization of a fisheye camera played a crucial role in obtaining a wide-ra
 The subsequent picture processing entailed utilizing a sequence of advanced analyzers, such as **BrightnessAnalyzer**, **SaturationAnalyzer**, **ContrastAnalyzer**, and **ColorHistogramAnalyzer**. Each of these analyzers had a vital function in extracting precise image properties, which were then inputted into the SVM classifier. The comprehensive method of combining features greatly improved the classifier's capacity to accurately distinguish between sunny and non-sunny circumstances.
 
 The **WeatherPredictor** class, which incorporates this sophisticated classifier, exhibited exceptional effectiveness in predicting real-time weather. The device's capacity to understand and analyze images captured by the fisheye camera and provide instant weather forecasts enhances its great usefulness in not only our project, but meteorology, environmental monitoring, and integration with smart home systems. Here is the final detection results for both cloudy and sunny day:
+<p align="center">
+  <img src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/131337093/ad17e3f9-b512-4e1a-a9ea-93d1f441756f" width="75%" />
+</p>
+
+_Figure 3.2 Weather Forecasting Results_
 
 In conclusion, the combination of the fisheye camera and advanced machine learning techniques in this weather forecast system highlights a seamless integration of hardware capabilities and software expertise. The system's ability to provide precise weather forecasts, based on a diverse and extensive dataset, demonstrates the significant impact of machine learning in real-world situations, especially in environmental analysis and meteorological research. Moreover, by utilizing the camera as the main method of verification, the prediction outputs are made more reliable and precise, taking into account the potential flaws of weather forecasts.
 
@@ -286,7 +295,7 @@ In the proposed methodology, we elaborate on an autonomous operational protocol,
   <img src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/131337093/24b6f3ea-27e0-44b2-9b21-2f6cd6eb20bc" width="75%" />
 </p>
 
-_Figure 3.1 Flowchart Diagram_
+_Figure 3.3 Flowchart Diagram_
 
 The methodology encapsulates a self-sufficient system that integrates environmental sensing, data processing, and mechanical actuation to optimize solar energy harvesting. Each segment's implementation is a testament to the system's robustness and reflects a harmonious interplay between software algorithms and hardware components.
 
