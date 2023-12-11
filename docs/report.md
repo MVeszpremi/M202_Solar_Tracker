@@ -292,7 +292,7 @@ In conclusion, the combination of the fisheye camera and advanced machine learni
 In the proposed methodology, we elaborate on an autonomous operational protocol, which is conceptualized through a sequential flowchart designed for real-time environmental monitoring and actuation based on solar positioning and weather conditions. The flowchart of implementation of whole system is shown as following:
 
 <p align="center">
-  <img src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/131337093/24b6f3ea-27e0-44b2-9b21-2f6cd6eb20bc" width="75%" />
+  <img src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/131337093/fd28d95e-b001-4db3-a8fb-d8fc0808b31d" width="75%" />
 </p>
 
 _Figure 3.3 Flowchart Diagram_
