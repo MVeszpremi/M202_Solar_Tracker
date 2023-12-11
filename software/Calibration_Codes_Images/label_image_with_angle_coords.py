@@ -15,15 +15,15 @@ font = cv2.FONT_HERSHEY_PLAIN
 font_color = (0, 0, 255)  # BGR color (e.g., red is (0, 0, 255))
 
 # Calculate the font thickness (optional)
-font_thickness = 1
+font_thickness = 2
 
 # Calculate the font scale based on font size
-font_scale = 0.4
+font_scale = 1
 
 
 texts_to_write = []
-for x in range (0, 940, 50):
-    for y in range(0, 520, 50):
+for x in range (0, 940, 100):
+    for y in range(0, 520, 100):
         image = cv2.putText(image, ('('+str(round(degree_matrix[y, x, 0])) + ', '+str(round(degree_matrix[y, x, 1])) +')'), (x, y), font, font_scale, font_color, font_thickness)
 
 # Save or display the image with text

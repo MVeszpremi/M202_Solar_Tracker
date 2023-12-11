@@ -34,6 +34,6 @@ for j in range(10, image_width, 25):  # Adjust the step size to your preference
 ax.invert_yaxis()
 
 # Hide the axes
-ax.axis('off')
+ax.axis('on')
 
 plt.show()
