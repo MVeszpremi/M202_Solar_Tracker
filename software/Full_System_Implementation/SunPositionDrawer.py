@@ -123,7 +123,10 @@ class SunPositionDrawer ():
     
         if(sun_direction[1] > 0 ):
             pitch = pitch * -1
-
+        else:
+            pitch = np.pi-pitch
+        
+        #print(pitch*(180/np.pi))
         pitch = self.clamp(pitch, (-27.5)*(np.pi/180), 27.5*(np.pi/180))
 
         # Apply pitch rotation (around X-axis)
