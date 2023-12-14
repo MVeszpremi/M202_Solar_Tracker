@@ -256,7 +256,7 @@ To summarize, the CloudSegmentation class includes a release method for releasin
 <p align="center">
   <img src="https://github.com/MVeszpremi/M202_Solar_Tracker/assets/131337093/1759d65d-05e3-453e-85e5-74732b20e6d1" width="75%" />
 </p>
-_Figure 3.1 Cloud_Detection_Result_
+Figure 3.1 Cloud Detection Result
 
 
 **Weather Dectection**
@@ -310,6 +310,8 @@ Figure # below depicts the potential costs incurred on a typical solar panel far
 
 ![Cost Analysis of Solar Farms without _Protection Mode_](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/149114738/b640ddda-d3db-4ebc-b3e4-3b181d9f7934)
 
+_Figure 4.1 Cost Analysis Bar Graph_
+
 System Solar Tracking Timelapse:
 
 <video width="320" height="240" controls>
@@ -326,18 +328,23 @@ From the camera perspective:
 
 Power Comparison:
 
-We noticed about a 6% increase in power when we were tracking the position of the sun.
+The graph shown below shows a trial we ran in the middle of the day, around 12 noon PST, to test our solar tracking and the resulting voltage output. The green and red lines represent the voltage and power readings over time of our solar tracking system and a traditional “non-tracking” system respectively. As you can see, our solar tracking system produces better power outputs. In our best trial, our tracking system averaged a 14.03 volt reading compared to the traditional 13.57 volt average. Overall, we measured about a 6% increase in power when we were tracking the sun in the middle of the day, which may seem small on the surface, but industry leaders see little to no power increase during the midday. 
 
 ![tracking_processeed](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/109947f1-69ac-4870-b4d3-ac40fd031277)
 
+_Figure 4.2 Midday Voltage and Power Results_
+
+The graph shows a trial we ran in the morning, around 6am to 1pm PST. Notice the large increase in efficiency between 6:45 and 7:15 am. This portrays the true beauty of our system. As the sun begins to rise, our solar panel chooses the most optimal angle to capture most of the sun’s energy and produce more than a 30% increase in power generation which is around the average of industry leaders.
+
 ![tracking_performance](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/5af34342-be19-4f80-ac7e-bf1e3c931e02)
 
+_Figure 4.3 Morning Voltage and Power Results_
 
 # 5. Discussion and Conclusions
 
 The solar panel positioning system project, epitomizing a synergy of mechanical ingenuity and software innovation, stands as a pivotal advancement in the domain of autonomous energy systems. Central to this project is a meticulously crafted mechanical system, equipped with Nema 17 Stepper motors and Hall effect sensors, which ensures the meticulous alignment of solar panels with the sun's trajectory. Augmented by a robust 2-axis tracker and a design that judiciously minimizes environmental impact, the system exemplifies a confluence of robustness and environmental consideration. An innovative integration in this system is the fisheye lens camera, affixed to the solar panel, which facilitates expansive sky imaging, thereby enhancing the overall functionality of the system.
 
-In the realm of software innovation, this project emerges distinctively, demonstrating real-time environmental monitoring prowess and leveraging advanced predictive analytics. The systematic capture and analysis of images at ten-second intervals empower a sophisticated algorithm that precisely identifies cloud centroids and tracks solar coordinates, leading to the meticulous adjustment of the solar panels' orientation. This integration of geometric computation with real-time data analytics heralds a significant leap in solar energy optimization. Empirical evidence substantiates a 6% increase in power output, attributable to the dynamic solar tracking feature, underscoring the pivotal role of real-time solar positioning in enhancing photovoltaic efficiency. This synergy of predictive analytics and automated response mechanisms sets a new standard in solar energy management, reinforcing the system's adaptability to environmental contingencies and augmenting its resilience against potential elemental adversities. The integration of the OpenWeatherMap API, coupled with the fisheye camera, further attests to the project's commitment to precision and anticipatory planning. Collectively, these technological elements not only bolster energy efficiency but also furnish the system with the capability to adapt to adverse meteorological conditions, such as hailstorms, thereby fortifying the solar panels against potential damage.
+In the realm of software innovation, this project emerges distinctively, demonstrating real-time environmental monitoring prowess and leveraging advanced predictive analytics. The systematic capture and analysis of images at ten-second intervals empower a sophisticated algorithm that precisely identifies cloud centroids and tracks solar coordinates, leading to the meticulous adjustment of the solar panels' orientation. This integration of geometric computation with real-time data analytics heralds a significant leap in solar energy optimization. Empirical evidence substantiates a 30% increase in power output, attributable to the dynamic solar tracking feature, underscoring the pivotal role of real-time solar positioning in enhancing photovoltaic efficiency. This synergy of predictive analytics and automated response mechanisms sets a new standard in solar energy management, reinforcing the system's adaptability to environmental contingencies and augmenting its resilience against potential elemental adversities. The integration of the OpenWeatherMap API, coupled with the fisheye camera, further attests to the project's commitment to precision and anticipatory planning. Collectively, these technological elements not only bolster energy efficiency but also furnish the system with the capability to adapt to adverse meteorological conditions, such as hailstorms, thereby fortifying the solar panels against potential damage.
 
 This aspect of the project is critical, particularly in geographies like California, where precipitation is infrequent but the risk of hail is present. Empirical testing, simulating hailstorm conditions sporadically over a series of days, has demonstrated the system's proficiency in detecting severe weather conditions and promptly reorienting the solar panels vertically to ensure their protection. This empirical validation emphasizes the robustness and dependability of the system, carving a path for further sophisticated advancements in the realm of solar energy management and safeguarding.
 
