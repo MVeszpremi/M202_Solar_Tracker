@@ -326,6 +326,12 @@ From the camera perspective:
   Your browser does not support the video tag.
 </video>
 
+Further demos: 
+
+[Video Shade](https://drive.google.com/file/d/1aAYxrOrUEbY_DrJ4N1zPYm7YQBEE2D13/view?resourcekey)
+
+[Video Track](https://drive.google.com/file/d/1NHFzb_xNgIbMgL55T2FarQT1rxUoBx2B/view?resourcekey)
+
 Power Comparison:
 
 The graph shown below shows a trial we ran in the middle of the day, around 12 noon PST, to test our solar tracking and the resulting voltage output. The green and red lines represent the voltage and power readings over time of our solar tracking system and a traditional “non-tracking” system respectively. As you can see, our solar tracking system produces better power outputs. In our best trial, our tracking system averaged a 14.03 volt reading compared to the traditional 13.57 volt average. Overall, we measured about a 6% increase in power when we were tracking the sun in the middle of the day, which may seem small on the surface, but industry leaders see little to no power increase during the midday. 
