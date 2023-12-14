@@ -330,6 +330,8 @@ We noticed about a 6% increase in power when we were tracking the position of th
 
 ![tracking_processeed](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/109947f1-69ac-4870-b4d3-ac40fd031277)
 
+![tracking_performance](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/5af34342-be19-4f80-ac7e-bf1e3c931e02)
+
 
 # 5. Discussion and Conclusions
 
