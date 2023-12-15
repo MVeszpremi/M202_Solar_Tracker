@@ -312,6 +312,22 @@ Figure # below depicts the potential costs incurred on a typical solar panel far
 
 _Figure 4.1 Cost Analysis Bar Graph_
 
+Power Comparison:
+
+The graph shown below shows a trial we ran in the middle of the day, around 12 noon PST, to test our solar tracking and the resulting voltage output. The green and red lines represent the voltage and power readings over time of our solar tracking system and a traditional “non-tracking” system respectively. As you can see, our solar tracking system produces better power outputs. In our best trial, our tracking system averaged a 14.03 volt reading compared to the traditional 13.57 volt average. Overall, we measured about a 6% increase in power when we were tracking the sun in the middle of the day, which may seem small on the surface, but industry leaders see little to no power increase during the midday. 
+
+![tracking_processeed](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/109947f1-69ac-4870-b4d3-ac40fd031277)
+
+_Figure 4.2 Midday Voltage and Power Results_
+
+The graph shows a trial we ran in the morning, around 6am to 1pm PST. Notice the large increase in efficiency between 6:45 and 7:15 am. This portrays the true beauty of our system. As the sun begins to rise, our solar panel chooses the most optimal angle to capture most of the sun’s energy and produce more than a 30% increase in power generation which is around the average of industry leaders.
+
+![tracking_performance](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/5af34342-be19-4f80-ac7e-bf1e3c931e02)
+
+_Figure 4.3 Morning Voltage and Power Results_
+
+Demos
+
 System Solar Tracking Timelapse:
 
 <video width="320" height="240" controls>
@@ -332,19 +348,6 @@ Further demos:
 
 [Video Track](https://drive.google.com/file/d/1NHFzb_xNgIbMgL55T2FarQT1rxUoBx2B/view?resourcekey)
 
-Power Comparison:
-
-The graph shown below shows a trial we ran in the middle of the day, around 12 noon PST, to test our solar tracking and the resulting voltage output. The green and red lines represent the voltage and power readings over time of our solar tracking system and a traditional “non-tracking” system respectively. As you can see, our solar tracking system produces better power outputs. In our best trial, our tracking system averaged a 14.03 volt reading compared to the traditional 13.57 volt average. Overall, we measured about a 6% increase in power when we were tracking the sun in the middle of the day, which may seem small on the surface, but industry leaders see little to no power increase during the midday. 
-
-![tracking_processeed](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/109947f1-69ac-4870-b4d3-ac40fd031277)
-
-_Figure 4.2 Midday Voltage and Power Results_
-
-The graph shows a trial we ran in the morning, around 6am to 1pm PST. Notice the large increase in efficiency between 6:45 and 7:15 am. This portrays the true beauty of our system. As the sun begins to rise, our solar panel chooses the most optimal angle to capture most of the sun’s energy and produce more than a 30% increase in power generation which is around the average of industry leaders.
-
-![tracking_performance](https://github.com/MVeszpremi/M202_Solar_Tracker/assets/102561670/5af34342-be19-4f80-ac7e-bf1e3c931e02)
-
-_Figure 4.3 Morning Voltage and Power Results_
 
 # 5. Discussion and Conclusions
 
